@@ -1,0 +1,33 @@
+{
+  "name": "snakegame",
+  "version": "1.0.0",
+  "description": "",
+  "main": "newVersion.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sos7ya/SnakeGame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sos7ya/SnakeGame/issues"
+  },
+  "homepage": "https://github.com/Sos7ya/SnakeGame#readme",
+  "devDependencies": {
+    "@babel/core": "^7.22.11",
+    "@babel/preset-env": "^7.22.10",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.2"
+  },
+  "dependencies": {
+    "uid": "^2.0.2",
+    "uuid": "^9.0.1",
+    "uuidv4": "^6.2.13"
+  }
+}

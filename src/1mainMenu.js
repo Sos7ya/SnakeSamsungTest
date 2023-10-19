@@ -137,6 +137,7 @@ class MainMenu extends Phaser.Scene{
         }
     }
     exit(){
+        if(gameState.onMenu){
         let closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId : sessionID,
@@ -144,6 +145,8 @@ class MainMenu extends Phaser.Scene{
         }
 
         window?.parent.postMessage(closeGameSession, '*');
+    }
+        
     }
 
     onPressExit(){

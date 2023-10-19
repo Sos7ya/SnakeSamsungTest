@@ -126,6 +126,7 @@ class GameOver extends Phaser.Scene{
 
     startGame(){
         gameState.isOver = false
+        gameState.onPause = false
         gameState.score = 0
         mainMenu.texturePack = getTexturePack();
 
@@ -146,6 +147,7 @@ class GameOver extends Phaser.Scene{
         }
 
         console.log(`started game w: allGame - ${startGame.allGameSessionId} and gameId - ${startGame.gameSessionId}`);
+        this.scene.stop()
         this.scene.start('snakegame')
     }
     exit(){

@@ -442,13 +442,15 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
   }, {
     key: "exit",
     value: function exit() {
-      var _window7;
-      var closeGameSession = {
-        action: 'closeGameSession',
-        allGameSessionId: sessionID,
-        timeStamp: Date.now()
-      };
-      (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(closeGameSession, '*');
+      if (gameState.onMenu) {
+        var _window7;
+        var closeGameSession = {
+          action: 'closeGameSession',
+          allGameSessionId: sessionID,
+          timeStamp: Date.now()
+        };
+        (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(closeGameSession, '*');
+      }
     }
   }, {
     key: "onPressExit",
@@ -1435,6 +1437,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
     key: "startGame",
     value: function startGame() {
       gameState.isOver = false;
+      gameState.onPause = false;
       gameState.score = 0;
       mainMenu.texturePack = getTexturePack();
       try {
@@ -1453,6 +1456,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
         (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(startGameError, '*');
       }
       console.log("started game w: allGame - ".concat(_startGame.allGameSessionId, " and gameId - ").concat(_startGame.gameSessionId));
+      this.scene.stop();
       this.scene.start('snakegame');
     }
   }, {

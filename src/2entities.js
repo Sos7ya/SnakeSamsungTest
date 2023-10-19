@@ -9,12 +9,15 @@ class Entity extends Phaser.GameObjects.Image{
     }
 }
 
+
+
 class Food extends Entity {
     constructor(scene, x, y) {
         super(scene, x, y);
-        this.body = this.scene.physics.add.sprite(x*CELL, y*CELL, 'food');
+        this.body = this.scene.physics.add.sprite(x*CELL, y*CELL, 'food').play('food-animation');
         this.body.setDisplaySize(32, 32);
         this.body.setSize(30,30, true)
+        
         this.body.setOrigin(0.5);
         this.total = 0;
     }
@@ -26,7 +29,7 @@ class Bonus extends Entity{
     constructor(scene, x, y, texture, i){
         super(scene, x, y);
         this.onPlate = false;
-        this.body = this.scene.physics.add.sprite(x * CELL, y * CELL, texture);
+        this.body = this.scene.physics.add.sprite(x * CELL, y * CELL, texture).play(`bonus-animation_${i}`);
         this.body.setDisplaySize(32, 32);
         
         this.body.setOrigin(0.5);
@@ -42,7 +45,7 @@ class Snake extends Entity {
 
         this.body = scene.add.group();
 
-        this.head = this.scene.physics.add.sprite(x * CELL, y * CELL, `head_${mainMenu.texturePack}`);
+        this.head = this.scene.physics.add.sprite(x * CELL, y * CELL, `head_${mainMenu.texturePack}`).play(`liking_${mainMenu.texturePack}`);
         this.body.add(this.head)
         this.head.setOrigin(0.5);
         this.head.setScale(0.4);
@@ -320,12 +323,12 @@ class Snake extends Entity {
     
     godMode(){
         this.onGod = true
-        //this.head.stop(`liking_${mainMenu.texturePack}`)
-        //this.head.play(`onGodeAnimation_${mainMenu.texturePack}`)
+        this.head.stop(`liking_${mainMenu.texturePack}`)
+        this.head.play(`onGodeAnimation_${mainMenu.texturePack}`)
         setTimeout(()=>{
-            this.onGod = false}, 1500)
-            //this.head.stop(`onGodeAnimation_${mainMenu.texturePack}`);
-            //this.head.play(`liking_${mainMenu.texturePack}`)}, 15000);
+            this.onGod = false
+            this.head.stop(`onGodeAnimation_${mainMenu.texturePack}`);
+            this.head.play(`liking_${mainMenu.texturePack}`)}, 15000);
     }
     speedUp(){
         this.speed -= 50;

@@ -123,102 +123,102 @@ class Preloader extends Phaser.Scene{
         }
         console.log('Preloader Finish!');
 
-        // this.anims.create({
-        //     key: 'food-animation',
-        //     frames:[
-        //         {key: 'food_small', duration: 500},
-        //         {key: 'food', duration: 500},
-        //         {key: 'food_big', duration: 500}
-        //     ],
-        //     frameRate: 6,
-        //     repeat: -1
-        // })
+        this.anims.create({
+            key: 'food-animation',
+            frames:[
+                {key: 'food_small', duration: 500},
+                {key: 'food', duration: 500},
+                {key: 'food_big', duration: 500}
+            ],
+            frameRate: 6,
+            repeat: -1
+        })
 
-        // // this.bonus = new Bonus(this, -1, -1, `bonus_${1}`, 1);
-        // // this.bonus.alpha = 0
+        // this.bonus = new Bonus(this, -1, -1, `bonus_${1}`, 1);
+        // this.bonus.alpha = 0
 
 
-        // this.anims.create({
-        //     key: 'liking_0',
-        //     frames: [
-        //         {key:`head_0`},
-        //         {key:`head_lick_0`, duration: 1000}
-        //         ],
-        //     frameRate: 6,
-        //     repeat: -1
-        // })
+        this.anims.create({
+            key: 'liking_0',
+            frames: [
+                {key:`head_0`},
+                {key:`head_lick_0`, duration: 1000}
+                ],
+            frameRate: 6,
+            repeat: -1
+        })
 
-        // this.anims.create({
-        //     key: 'liking_1',
-        //     frames: [
-        //         {key:`head_1`},
-        //         {key:`head_lick_1`, duration: 1000}
-        //         ],
-        //     frameRate: 6,
-        //     repeat: -1
-        // })
+        this.anims.create({
+            key: 'liking_1',
+            frames: [
+                {key:`head_1`},
+                {key:`head_lick_1`, duration: 1000}
+                ],
+            frameRate: 6,
+            repeat: -1
+        })
 
-        // this.anims.create({
-        //     key: 'liking_2',
-        //     frames: [
-        //         {key:`head_2`},
-        //         {key:`head_lick_2`, duration: 1000}
-        //         ],
-        //     frameRate: 6,
-        //     repeat: -1
-        // })
+        this.anims.create({
+            key: 'liking_2',
+            frames: [
+                {key:`head_2`},
+                {key:`head_lick_2`, duration: 1000}
+                ],
+            frameRate: 6,
+            repeat: -1
+        })
 
-        // this.anims.create({
-        //     key: 'onGodeAnimation_0',
-        //     frames: [
-        //         {key:`head_helmet_0`},
-        //         {key:`head_helmet_nolick_0`, duration: 1000}
-        //         ],
-        //     frameRate: 4,
-        //     repeat: -1
-        // })
+        this.anims.create({
+            key: 'onGodeAnimation_0',
+            frames: [
+                {key:`head_helmet_0`},
+                {key:`head_helmet_nolick_0`, duration: 1000}
+                ],
+            frameRate: 4,
+            repeat: -1
+        })
 
-        // this.anims.create({
-        //     key: 'onGodeAnimation_1',
-        //     frames: [
-        //         {key:`head_helmet_1`},
-        //         {key:`head_helmet_nolick_1`, duration: 1000}
-        //         ],
-        //     frameRate: 4,
-        //     repeat: -1
-        // })
+        this.anims.create({
+            key: 'onGodeAnimation_1',
+            frames: [
+                {key:`head_helmet_1`},
+                {key:`head_helmet_nolick_1`, duration: 1000}
+                ],
+            frameRate: 4,
+            repeat: -1
+        })
 
-        // this.anims.create({
-        //     key: 'onGodeAnimation_2',
-        //     frames: [
-        //         {key:`head_helmet_2`},
-        //         {key:`head_helmet_nolick_2`, duration: 1000}
-        //         ],
-        //     frameRate: 4,
-        //     repeat: -1
-        // })
+        this.anims.create({
+            key: 'onGodeAnimation_2',
+            frames: [
+                {key:`head_helmet_2`},
+                {key:`head_helmet_nolick_2`, duration: 1000}
+                ],
+            frameRate: 4,
+            repeat: -1
+        })
 
-        // this.anims.create({
-        //     key: 'bonus-animation_0',
-        //     frames:[
-        //         {key: `bonus_small_${0}`, duration: 500},
-        //         {key: `bonus_${0}`, duration: 500},
-        //         {key: `bonus_big_${0}`, duration: 500}
-        //     ],
-        //     frameRate: 6,
-        //     repeat: -1
-        // })
+        this.anims.create({
+            key: 'bonus-animation_0',
+            frames:[
+                {key: `bonus_small_${0}`, duration: 500},
+                {key: `bonus_${0}`, duration: 500},
+                {key: `bonus_big_${0}`, duration: 500}
+            ],
+            frameRate: 6,
+            repeat: -1
+        })
 
-        // this.anims.create({
-        //     key: 'bonus-animation_1',
-        //     frames:[
-        //         {key: `bonus_small_${1}`, duration: 500},
-        //         {key: `bonus_${1}`, duration: 500},
-        //         {key: `bonus_big_${1}`, duration: 500}
-        //     ],
-        //     frameRate: 6,
-        //     repeat: -1
-        // })
+        this.anims.create({
+            key: 'bonus-animation_1',
+            frames:[
+                {key: `bonus_small_${1}`, duration: 500},
+                {key: `bonus_${1}`, duration: 500},
+                {key: `bonus_big_${1}`, duration: 500}
+            ],
+            frameRate: 6,
+            repeat: -1
+        })
         
         this.scene.start(mainMenu);
     }

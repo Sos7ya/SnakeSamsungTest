@@ -163,103 +163,121 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
         (_window4 = window) === null || _window4 === void 0 || _window4.parent.postMessage(downloadError, '*');
       }
       console.log('Preloader Finish!');
+      this.anims.create({
+        key: 'food-animation',
+        frames: [{
+          key: 'food_small',
+          duration: 500
+        }, {
+          key: 'food',
+          duration: 500
+        }, {
+          key: 'food_big',
+          duration: 500
+        }],
+        frameRate: 6,
+        repeat: -1
+      });
 
-      // this.anims.create({
-      //     key: 'food-animation',
-      //     frames:[
-      //         {key: 'food_small', duration: 500},
-      //         {key: 'food', duration: 500},
-      //         {key: 'food_big', duration: 500}
-      //     ],
-      //     frameRate: 6,
-      //     repeat: -1
-      // })
+      // this.bonus = new Bonus(this, -1, -1, `bonus_${1}`, 1);
+      // this.bonus.alpha = 0
 
-      // // this.bonus = new Bonus(this, -1, -1, `bonus_${1}`, 1);
-      // // this.bonus.alpha = 0
-
-      // this.anims.create({
-      //     key: 'liking_0',
-      //     frames: [
-      //         {key:`head_0`},
-      //         {key:`head_lick_0`, duration: 1000}
-      //         ],
-      //     frameRate: 6,
-      //     repeat: -1
-      // })
-
-      // this.anims.create({
-      //     key: 'liking_1',
-      //     frames: [
-      //         {key:`head_1`},
-      //         {key:`head_lick_1`, duration: 1000}
-      //         ],
-      //     frameRate: 6,
-      //     repeat: -1
-      // })
-
-      // this.anims.create({
-      //     key: 'liking_2',
-      //     frames: [
-      //         {key:`head_2`},
-      //         {key:`head_lick_2`, duration: 1000}
-      //         ],
-      //     frameRate: 6,
-      //     repeat: -1
-      // })
-
-      // this.anims.create({
-      //     key: 'onGodeAnimation_0',
-      //     frames: [
-      //         {key:`head_helmet_0`},
-      //         {key:`head_helmet_nolick_0`, duration: 1000}
-      //         ],
-      //     frameRate: 4,
-      //     repeat: -1
-      // })
-
-      // this.anims.create({
-      //     key: 'onGodeAnimation_1',
-      //     frames: [
-      //         {key:`head_helmet_1`},
-      //         {key:`head_helmet_nolick_1`, duration: 1000}
-      //         ],
-      //     frameRate: 4,
-      //     repeat: -1
-      // })
-
-      // this.anims.create({
-      //     key: 'onGodeAnimation_2',
-      //     frames: [
-      //         {key:`head_helmet_2`},
-      //         {key:`head_helmet_nolick_2`, duration: 1000}
-      //         ],
-      //     frameRate: 4,
-      //     repeat: -1
-      // })
-
-      // this.anims.create({
-      //     key: 'bonus-animation_0',
-      //     frames:[
-      //         {key: `bonus_small_${0}`, duration: 500},
-      //         {key: `bonus_${0}`, duration: 500},
-      //         {key: `bonus_big_${0}`, duration: 500}
-      //     ],
-      //     frameRate: 6,
-      //     repeat: -1
-      // })
-
-      // this.anims.create({
-      //     key: 'bonus-animation_1',
-      //     frames:[
-      //         {key: `bonus_small_${1}`, duration: 500},
-      //         {key: `bonus_${1}`, duration: 500},
-      //         {key: `bonus_big_${1}`, duration: 500}
-      //     ],
-      //     frameRate: 6,
-      //     repeat: -1
-      // })
-
+      this.anims.create({
+        key: 'liking_0',
+        frames: [{
+          key: "head_0"
+        }, {
+          key: "head_lick_0",
+          duration: 1000
+        }],
+        frameRate: 6,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'liking_1',
+        frames: [{
+          key: "head_1"
+        }, {
+          key: "head_lick_1",
+          duration: 1000
+        }],
+        frameRate: 6,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'liking_2',
+        frames: [{
+          key: "head_2"
+        }, {
+          key: "head_lick_2",
+          duration: 1000
+        }],
+        frameRate: 6,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'onGodeAnimation_0',
+        frames: [{
+          key: "head_helmet_0"
+        }, {
+          key: "head_helmet_nolick_0",
+          duration: 1000
+        }],
+        frameRate: 4,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'onGodeAnimation_1',
+        frames: [{
+          key: "head_helmet_1"
+        }, {
+          key: "head_helmet_nolick_1",
+          duration: 1000
+        }],
+        frameRate: 4,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'onGodeAnimation_2',
+        frames: [{
+          key: "head_helmet_2"
+        }, {
+          key: "head_helmet_nolick_2",
+          duration: 1000
+        }],
+        frameRate: 4,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'bonus-animation_0',
+        frames: [{
+          key: "bonus_small_".concat(0),
+          duration: 500
+        }, {
+          key: "bonus_".concat(0),
+          duration: 500
+        }, {
+          key: "bonus_big_".concat(0),
+          duration: 500
+        }],
+        frameRate: 6,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'bonus-animation_1',
+        frames: [{
+          key: "bonus_small_".concat(1),
+          duration: 500
+        }, {
+          key: "bonus_".concat(1),
+          duration: 500
+        }, {
+          key: "bonus_big_".concat(1),
+          duration: 500
+        }],
+        frameRate: 6,
+        repeat: -1
+      });
       this.scene.start(mainMenu);
     }
   }]);
@@ -468,7 +486,7 @@ var Food = /*#__PURE__*/function (_Entity) {
     var _this4;
     _classCallCheck(this, Food);
     _this4 = _super4.call(this, scene, x, y);
-    _this4.body = _this4.scene.physics.add.sprite(x * CELL, y * CELL, 'food');
+    _this4.body = _this4.scene.physics.add.sprite(x * CELL, y * CELL, 'food').play('food-animation');
     _this4.body.setDisplaySize(32, 32);
     _this4.body.setSize(30, 30, true);
     _this4.body.setOrigin(0.5);
@@ -491,7 +509,7 @@ var Bonus = /*#__PURE__*/function (_Entity2) {
     _classCallCheck(this, Bonus);
     _this5 = _super5.call(this, scene, x, y);
     _this5.onPlate = false;
-    _this5.body = _this5.scene.physics.add.sprite(x * CELL, y * CELL, texture);
+    _this5.body = _this5.scene.physics.add.sprite(x * CELL, y * CELL, texture).play("bonus-animation_".concat(i));
     _this5.body.setDisplaySize(32, 32);
     _this5.body.setOrigin(0.5);
     _this5.index = i;
@@ -512,7 +530,7 @@ var Snake = /*#__PURE__*/function (_Entity3) {
     _this6 = _super6.call(this, scene, x, y);
     _this6.headPosition = new Phaser.Geom.Point(x, y);
     _this6.body = scene.add.group();
-    _this6.head = _this6.scene.physics.add.sprite(x * CELL, y * CELL, "head_".concat(mainMenu.texturePack));
+    _this6.head = _this6.scene.physics.add.sprite(x * CELL, y * CELL, "head_".concat(mainMenu.texturePack)).play("liking_".concat(mainMenu.texturePack));
     _this6.body.add(_this6.head);
     _this6.head.setOrigin(0.5);
     _this6.head.setScale(0.4);
@@ -766,13 +784,13 @@ var Snake = /*#__PURE__*/function (_Entity3) {
     value: function godMode() {
       var _this8 = this;
       this.onGod = true;
-      //this.head.stop(`liking_${mainMenu.texturePack}`)
-      //this.head.play(`onGodeAnimation_${mainMenu.texturePack}`)
+      this.head.stop("liking_".concat(mainMenu.texturePack));
+      this.head.play("onGodeAnimation_".concat(mainMenu.texturePack));
       setTimeout(function () {
         _this8.onGod = false;
-      }, 1500);
-      //this.head.stop(`onGodeAnimation_${mainMenu.texturePack}`);
-      //this.head.play(`liking_${mainMenu.texturePack}`)}, 15000);
+        _this8.head.stop("onGodeAnimation_".concat(mainMenu.texturePack));
+        _this8.head.play("liking_".concat(mainMenu.texturePack));
+      }, 15000);
     }
   }, {
     key: "speedUp",
@@ -904,7 +922,7 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
       // this.snake.bodySegments[1].depth = this.food.body.depth
       // this.physics.add.collider(this.snake.bodySegments[0], this.food.body, ()=>{this.snake.grow(); this.repositionFood(); this.snake.biteSound.play();gameState.score+=1}, null, this);
 
-      //this.stopSound =  setInterval(()=>{this.soundOff(); this.marker >= 5 ? clearInterval(this.stopSound) && this.bgmusic.stop() : null}, 1000);
+      // this.stopSound =  setInterval(()=>{this.soundOff(); this.marker >= 5 ? clearInterval(this.stopSound) && this.bgmusic.stop() : null}, 1000);
 
       this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, "".concat(game_version), {
         fontFamily: 'Nunito-black',
@@ -1499,7 +1517,7 @@ var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
 var CELL = 32;
-var game_version = 'v 0.4.2';
+var game_version = 'v 0.4.2s';
 var sessionID;
 var gameId = generateUUID();
 var game_session = {

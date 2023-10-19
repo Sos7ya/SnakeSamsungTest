@@ -12,14 +12,17 @@ const buildBundle = ()=> {
         presets:["@babel/preset-env"]
     }))
     .pipe(dest('.'))
+   
 }
+
 const buildLibs = ()=>{
     return src([
         'src/libs/*.js'
     ])
+
     .pipe(concat('libs.js'))
     .pipe(babel({
-        presets: ["@babel/preset-env"]
+        presets:["@babel/preset-env"]
     }))
     .pipe(dest('.'))
 }

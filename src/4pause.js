@@ -166,6 +166,7 @@ class ScenePause extends Phaser.Scene{
     }
 
     exit(){
+        if(gameState.onPause){
         let closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId : sessionID,
@@ -173,6 +174,8 @@ class ScenePause extends Phaser.Scene{
             }
 
         window?.parent.postMessage(closeGameSession, '*');
+    }
+        
     }
 
     onPressExit(){

@@ -151,13 +151,16 @@ class GameOver extends Phaser.Scene{
         this.scene.start('snakegame')
     }
     exit(){
-        let closeGameSession = {
-            action: 'closeGameSession',
-            allGameSessionId : sessionID,
-            timeStamp : Date.now()
-            }
-
-        window?.parent.postMessage(closeGameSession, '*');
+        if(gameState.isOver){
+            let closeGameSession = {
+                action: 'closeGameSession',
+                allGameSessionId : sessionID,
+                timeStamp : Date.now()
+                }
+    
+            window?.parent.postMessage(closeGameSession, '*');
+        }
+        
     }
 
     onPressExit(){

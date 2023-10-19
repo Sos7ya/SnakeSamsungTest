@@ -1282,13 +1282,15 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
   }, {
     key: "exit",
     value: function exit() {
-      var _window11;
-      var closeGameSession = {
-        action: 'closeGameSession',
-        allGameSessionId: sessionID,
-        timeStamp: Date.now()
-      };
-      (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(closeGameSession, '*');
+      if (gameState.onPause) {
+        var _window11;
+        var closeGameSession = {
+          action: 'closeGameSession',
+          allGameSessionId: sessionID,
+          timeStamp: Date.now()
+        };
+        (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(closeGameSession, '*');
+      }
     }
   }, {
     key: "onPressExit",
@@ -1462,13 +1464,15 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
   }, {
     key: "exit",
     value: function exit() {
-      var _window15;
-      var closeGameSession = {
-        action: 'closeGameSession',
-        allGameSessionId: sessionID,
-        timeStamp: Date.now()
-      };
-      (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(closeGameSession, '*');
+      if (gameState.isOver) {
+        var _window15;
+        var closeGameSession = {
+          action: 'closeGameSession',
+          allGameSessionId: sessionID,
+          timeStamp: Date.now()
+        };
+        (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(closeGameSession, '*');
+      }
     }
   }, {
     key: "onPressExit",
@@ -1521,7 +1525,7 @@ var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
 var CELL = 32;
-var game_version = 'v 0.4.2s';
+var game_version = 'v 0.4.3s';
 var sessionID;
 var gameId = generateUUID();
 var game_session = {

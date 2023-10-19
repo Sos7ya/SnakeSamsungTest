@@ -14,7 +14,7 @@ class GameOver extends Phaser.Scene{
         let gameOver = {
             action: 'gameOver',
             allGameSessionId : sessionID,
-            gameSessionId : gameId,
+            gameSessionId : startGame.gameSessionId,
             score : gameState.score,
             timeStamp : Date.now()
         }

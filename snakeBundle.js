@@ -1328,7 +1328,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
       var gameOver = {
         action: 'gameOver',
         allGameSessionId: sessionID,
-        gameSessionId: gameId,
+        gameSessionId: _startGame.gameSessionId,
         score: gameState.score,
         timeStamp: Date.now()
       };

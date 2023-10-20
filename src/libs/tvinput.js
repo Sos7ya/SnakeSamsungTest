@@ -17,7 +17,6 @@ window.addEventListener('load', function() {
       ];
 
       var eventHandler = function(evt) {
-        // console.log(evt.type, evt.target, evt.detail);
         if(evt.type == 'sn:enter-down'){
           mainMenu.gameToggle()
           gameOver.gameToggle()

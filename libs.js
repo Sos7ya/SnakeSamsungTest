@@ -1029,7 +1029,6 @@ window.addEventListener('load', function () {
   var validEvents = ['sn:willmove', 'sn:enter-down', 'sn:enter-up'];
   var eventHandler = function eventHandler(evt) {
     var _evt$detail, _snake, _snake2, _snake3, _snake4;
-    // console.log(evt.type, evt.target, evt.detail);
     if (evt.type == 'sn:enter-down') {
       mainMenu.gameToggle();
       gameOver.gameToggle();
@@ -1098,21 +1097,6 @@ function initializeAndroidTVInput() {
       }
     }
   });
-}
-var IDX = 256,
-  HEX = [],
-  SIZE = 256,
-  BUFFER;
-while (IDX--) HEX[IDX] = (IDX + 256).toString(16).substring(1);
-function uid(len) {
-  var i = 0,
-    tmp = len || 12;
-  if (!BUFFER || IDX + tmp > SIZE * 2) {
-    for (BUFFER = '', IDX = 0; i < SIZE; i++) {
-      BUFFER += HEX[Math.random() * 256 | 0];
-    }
-  }
-  return BUFFER.substring(IDX, IDX++ + tmp);
 }
 function generateUUID() {
   var hexDigits = '0123456789abcdef';

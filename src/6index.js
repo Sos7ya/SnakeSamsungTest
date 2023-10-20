@@ -7,28 +7,10 @@ var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
 var CELL = 32;
-var game_version = 'v 0.4.3s';
+var game_version = 'v 0.4.4s';
 
 var sessionID;
 var gameId = generateUUID();
-
-
-
-var game_session = {
-    ts: 0,
-    game_id: '',
-    action:{
-        startGameSession: 0,
-        startGame: 0,
-        levelUp: 0,
-        gameOver: 0,
-        closeGameSession: 0,
-    },
-    score: null,
-    highscore: null,
-    level: null,
-    onClose: false
-}
 
 function getTexturePack(){
     return Math.floor(Math.random()*3);
@@ -69,8 +51,7 @@ window.onload = function(){
     game = new Phaser.Game(config);
 }
 
-sessionID = generateUUID() //`${uid(8)+ '-'+ uid(4) + '-' + uid(4) + '-' + uid(4) +'-'+ uid(12)}`
-    console.log('session ID:', sessionID);
+sessionID = generateUUID()
     try{
         var startGameSession = {
           action: 'startGameSession',

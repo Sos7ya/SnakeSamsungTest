@@ -39,7 +39,6 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
           timeStamp: Date.now()
         };
         (_window = window) === null || _window === void 0 || _window.parent.postMessage(startDownloading, '*');
-        console.log('Preloader starting!');
         this.loadText = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
           fontFamily: 'Nunito-black',
           fontStyle: 'bold',
@@ -162,7 +161,6 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
         };
         (_window4 = window) === null || _window4 === void 0 || _window4.parent.postMessage(downloadError, '*');
       }
-      console.log('Preloader Finish!');
       this.anims.create({
         key: 'food-animation',
         frames: [{
@@ -303,7 +301,6 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
     key: "create",
     value: function create() {
       var _this2 = this;
-      console.log('MainMenu is started!');
       this.texturePack = getTexturePack();
       gameState.onMenu = true;
       gameState.onGame = false;
@@ -365,7 +362,6 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
     key: "loadScore",
     value: function loadScore() {
       if (localStorage.getItem('heighScore_snake')) {
-        game_session.highscore = JSON.parse(localStorage.getItem('heighScore_snake'));
         this.hieghScoreText = this.add.text(game.config.width / 2, game.config.height - 100, "".concat(JSON.parse(localStorage.getItem('heighScore_snake'))), {
           fontFamily: 'Rubik-Medium',
           fontStyle: 'normal',
@@ -747,7 +743,6 @@ var Snake = /*#__PURE__*/function (_Entity3) {
           y: this.head.y
         }, 1);
         if (hitBody && this.onGod == false) {
-          console.log('dead');
           this.alive = false;
           this.deadSound.play();
           return false;
@@ -868,9 +863,6 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
     key: "create",
     value: function create() {
       var _this10 = this;
-      console.log('play now!');
-      game_session.action.startGame = new Date().getTime();
-      console.log(game_session.action.startGame);
       gameState.onGame = true;
       gameState.onPause = false;
       gameState.onMenu = false;
@@ -919,7 +911,6 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
         }
       });
       this.loadScore();
-      console.log(this.snake);
       this.snake.bodySegments[1].setSize(30, 30, true);
       // this.snake.bodySegments[1].depth = this.food.body.depth
       // this.physics.add.collider(this.snake.bodySegments[0], this.food.body, ()=>{this.snake.grow(); this.repositionFood(); this.snake.biteSound.play();gameState.score+=1}, null, this);
@@ -945,7 +936,6 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
     key: "loadScore",
     value: function loadScore() {
       if (localStorage.getItem('heighScore_snake')) {
-        console.log(localStorage.getItem('heighScore_snake'));
         this.hieghScoreText = this.add.text(this.scoreText.x + 260, this.scoreText.y, "".concat(JSON.parse(localStorage.getItem('heighScore_snake'))), {
           fontFamily: 'Nunito',
           fontStyle: 'bold',
@@ -1027,7 +1017,6 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
       } finally {
         _iterator3.f();
       }
-      console.log(ocupate);
       if (validLocationsX.length > 0) {
         var pos = {
           x: this.getPositionX(),
@@ -1047,7 +1036,6 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
                 x: this.getPositionX(),
                 y: this.getPositionY()
               };
-              console.log(pos.x, pos.y);
             } else if (newpos.x == Math.floor(point.x / CELL) && newpos.y == Math.floor(point.y / CELL)) {
               newpos = {
                 x: this.getPositionX(),
@@ -1190,7 +1178,6 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
     key: "saveScore",
     value: function saveScore() {
       this.heighScore = gameState.score;
-      game_session.highscore = JSON.parse(localStorage.getItem('heighScore_snake'));
       this.oldScore = JSON.parse(localStorage.getItem('heighScore_snake'));
       this.heighScore > this.oldScore ? localStorage.setItem('heighScore_snake', JSON.stringify(this.heighScore)) : this.heighScore = this.oldScore;
     }
@@ -1198,7 +1185,6 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
     key: "loadScore",
     value: function loadScore() {
       if (localStorage.getItem('heighScore_snake')) {
-        console.log(localStorage.getItem('heighScore_snake'));
         this.hieghScoreText = this.add.text(game.config.width / 2 + 150, game.config.height - 100, "".concat(JSON.parse(localStorage.getItem('heighScore_snake'))), {
           fontFamily: 'Rubik-Medium',
           fontStyle: 'normal',
@@ -1320,8 +1306,6 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
     value: function create() {
       var _window12,
         _this13 = this;
-      game_session.action.gameOver = new Date().getTime();
-      console.log(game_session.action.gameOver);
       snacegame.bgmusic.stop();
       gameState.onGame = false;
       gameState.isOver = true;
@@ -1333,7 +1317,6 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
         timeStamp: Date.now()
       };
       (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(gameOver, '*');
-      console.log("game ".concat(gameOver.gameSessionId, " was over! game session: ").concat(gameOver.allGameSessionId));
       this.menuBG = this.add.image(game.config.width / 2, game.config.height / 2, "mainBG_".concat(mainMenu.texturePack)).setOrigin(0.5);
       this.menuBG.setDisplaySize(game.config.width, game.config.height);
       this.controlsInfo = this.add.image(310, 70, 'controlsInfo').setOrigin(0.5);
@@ -1390,7 +1373,6 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
 
       this.saveScore();
       this.loadScore();
-      game_session.score = gameState.score;
       this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, "".concat(game_version), {
         fontFamily: 'Nunito',
         fontStyle: 'bold',
@@ -1457,7 +1439,6 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
         };
         (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(startGameError, '*');
       }
-      console.log("started game w: allGame - ".concat(_startGame.allGameSessionId, " and gameId - ").concat(_startGame.gameSessionId));
       this.scene.stop();
       this.scene.start('snakegame');
     }
@@ -1485,7 +1466,6 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
     key: "saveScore",
     value: function saveScore() {
       this.heighScore = gameState.score;
-      game_session.highscore = JSON.parse(localStorage.getItem('heighScore_snake'));
       this.oldScore = JSON.parse(localStorage.getItem('heighScore_snake'));
       this.heighScore > this.oldScore ? localStorage.setItem('heighScore_snake', JSON.stringify(this.heighScore)) : this.heighScore = this.oldScore;
     }
@@ -1525,24 +1505,9 @@ var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
 var CELL = 32;
-var game_version = 'v 0.4.3s';
+var game_version = 'v 0.4.4s';
 var sessionID;
 var gameId = generateUUID();
-var game_session = {
-  ts: 0,
-  game_id: '',
-  action: {
-    startGameSession: 0,
-    startGame: 0,
-    levelUp: 0,
-    gameOver: 0,
-    closeGameSession: 0
-  },
-  score: null,
-  highscore: null,
-  level: null,
-  onClose: false
-};
 function getTexturePack() {
   return Math.floor(Math.random() * 3);
 }
@@ -1576,8 +1541,7 @@ window.onload = function () {
   canvas.outline = 0;
   game = new Phaser.Game(config);
 };
-sessionID = generateUUID(); //`${uid(8)+ '-'+ uid(4) + '-' + uid(4) + '-' + uid(4) +'-'+ uid(12)}`
-console.log('session ID:', sessionID);
+sessionID = generateUUID();
 try {
   var _window16;
   var startGameSession = {

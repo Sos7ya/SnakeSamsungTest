@@ -83,16 +83,12 @@ class ScenePause extends Phaser.Scene{
 
     saveScore(){
         this.heighScore = gameState.score;
-
-        game_session.highscore = JSON.parse(localStorage.getItem('heighScore_snake'));
-        
         this.oldScore = JSON.parse(localStorage.getItem('heighScore_snake'));
         this.heighScore > this.oldScore ? localStorage.setItem('heighScore_snake', JSON.stringify(this.heighScore)) : this.heighScore = this.oldScore;
     }
 
     loadScore(){
         if(localStorage.getItem('heighScore_snake')){
-            console.log(localStorage.getItem('heighScore_snake'))
             this.hieghScoreText = this.add.text(game.config.width/2+150, game.config.height - 100, `${JSON.parse(localStorage.getItem('heighScore_snake'))}`, { fontFamily:'Rubik-Medium', fontStyle:'normal', fontSize: '64px', fill: '#fff' }).setOrigin(0.5);
             this.hieghScoreTitle = this.add.text(this.hieghScoreText.x, this.hieghScoreText.y-75, 'Рекорд', {fontFamily: 'Rubik-Regular', fontSize: '48px', fill: '#D0DBD1'}).setOrigin(0.5);
             this.line = this.add.image(game.config.width / 2, game.config.height - 120, 'line').setOrigin(0.5);

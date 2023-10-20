@@ -4,9 +4,6 @@ class GameOver extends Phaser.Scene{
     }
 
     create(){
-        game_session.action.gameOver = new Date().getTime();
-        console.log(game_session.action.gameOver)
-        
         snacegame.bgmusic.stop()
         gameState.onGame = false
         gameState.isOver = true
@@ -21,7 +18,6 @@ class GameOver extends Phaser.Scene{
 
         window?.parent.postMessage(gameOver, '*');
 
-        console.log(`game ${gameOver.gameSessionId} was over! game session: ${gameOver.allGameSessionId}`);
 
         this.menuBG = this.add.image(game.config.width/2, game.config.height/2, `mainBG_${mainMenu.texturePack}`).setOrigin(0.5)
         this.menuBG.setDisplaySize(game.config.width, game.config.height)
@@ -84,7 +80,6 @@ class GameOver extends Phaser.Scene{
 
         this.saveScore();
         this.loadScore();
-        game_session.score = gameState.score
 
         this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, `${game_version}`, { fontFamily:'Nunito', fontStyle:'bold', fontSize: '30px', fill: '#fff' }).setOrigin(0.5);
     }
@@ -146,7 +141,6 @@ class GameOver extends Phaser.Scene{
             window?.parent.postMessage(startGameError, '*');
         }
 
-        console.log(`started game w: allGame - ${startGame.allGameSessionId} and gameId - ${startGame.gameSessionId}`);
         this.scene.stop()
         this.scene.start('snakegame')
     }
@@ -171,9 +165,6 @@ class GameOver extends Phaser.Scene{
 
     saveScore(){
         this.heighScore = gameState.score;
-
-        game_session.highscore = JSON.parse(localStorage.getItem('heighScore_snake'));
-        
         this.oldScore = JSON.parse(localStorage.getItem('heighScore_snake'));
         this.heighScore > this.oldScore ? localStorage.setItem('heighScore_snake', JSON.stringify(this.heighScore)) : this.heighScore = this.oldScore;
     }

@@ -1505,7 +1505,7 @@ var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
 var CELL = 32;
-var game_version = 'v 0.4.4s';
+var game_version = 'v 0.4.4t';
 var sessionID;
 var gameId = generateUUID();
 function getTexturePack() {
@@ -1521,8 +1521,8 @@ var gameState = {
 window.onload = function () {
   var config = {
     type: Phaser.CANVAS,
-    width: 1920,
-    height: 1080,
+    width: 1600,
+    height: 900,
     backgroundColor: '#000',
     parent: "phaser-example",
     scene: [preloader, mainMenu, snacegame, scenePause, gameOver],

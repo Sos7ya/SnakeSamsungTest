@@ -26,8 +26,8 @@ var gameState ={
 window.onload = function(){
     var config = {
         type: Phaser.CANVAS,
-        width: 1600,
-        height: 900,
+        width: 1920,
+        height: 1080,
         
         backgroundColor: '#000',
         parent: "phaser-example",

@@ -439,13 +439,16 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
     key: "exit",
     value: function exit() {
       if (gameState.onMenu) {
-        var _window7;
-        var closeGameSession = {
-          action: 'closeGameSession',
-          allGameSessionId: sessionID,
-          timeStamp: Date.now()
-        };
-        (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(closeGameSession, '*');
+        if (!posted) {
+          var _window7;
+          var closeGameSession = {
+            action: 'closeGameSession',
+            allGameSessionId: sessionID,
+            timeStamp: Date.now()
+          };
+          (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(closeGameSession, '*');
+          posted = true;
+        }
       }
     }
   }, {
@@ -1269,13 +1272,24 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
     key: "exit",
     value: function exit() {
       if (gameState.onPause) {
-        var _window11;
-        var closeGameSession = {
-          action: 'closeGameSession',
-          allGameSessionId: sessionID,
-          timeStamp: Date.now()
-        };
-        (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(closeGameSession, '*');
+        if (!posted) {
+          var _window11, _window12;
+          var closeGameSession = {
+            action: 'closeGameSession',
+            allGameSessionId: sessionID,
+            timeStamp: Date.now()
+          };
+          var _gameOver = {
+            action: 'gameOver',
+            allGameSessionId: sessionID,
+            gameSessionId: _startGame.gameSessionId,
+            score: gameState.score,
+            timeStamp: Date.now()
+          };
+          (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(_gameOver, '*');
+          (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(closeGameSession, '*');
+          posted = true;
+        }
       }
     }
   }, {
@@ -1304,7 +1318,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
   _createClass(GameOver, [{
     key: "create",
     value: function create() {
-      var _window12,
+      var _window13,
         _this13 = this;
       snacegame.bgmusic.stop();
       gameState.onGame = false;
@@ -1316,7 +1330,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
         score: gameState.score,
         timeStamp: Date.now()
       };
-      (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(gameOver, '*');
+      (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(gameOver, '*');
       this.menuBG = this.add.image(game.config.width / 2, game.config.height / 2, "mainBG_".concat(mainMenu.texturePack)).setOrigin(0.5);
       this.menuBG.setDisplaySize(game.config.width, game.config.height);
       this.controlsInfo = this.add.image(310, 70, 'controlsInfo').setOrigin(0.5);
@@ -1425,19 +1439,19 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
       gameState.score = 0;
       mainMenu.texturePack = getTexturePack();
       try {
-        var _window13;
+        var _window14;
         _startGame.gameSessionId = generateUUID();
         _startGame.allGameSessionId = sessionID;
-        (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(_startGame, '*');
+        (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(_startGame, '*');
       } catch (er) {
-        var _window14;
+        var _window15;
         var startGameError = {
           action: 'startGameError',
           allGameSessionId: sessionID,
           gameSessionId: gameId,
           timeStamp: Date.now()
         };
-        (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(startGameError, '*');
+        (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(startGameError, '*');
       }
       this.scene.stop();
       this.scene.start('snakegame');
@@ -1446,13 +1460,16 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
     key: "exit",
     value: function exit() {
       if (gameState.isOver) {
-        var _window15;
-        var closeGameSession = {
-          action: 'closeGameSession',
-          allGameSessionId: sessionID,
-          timeStamp: Date.now()
-        };
-        (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(closeGameSession, '*');
+        if (!posted) {
+          var _window16;
+          var closeGameSession = {
+            action: 'closeGameSession',
+            allGameSessionId: sessionID,
+            timeStamp: Date.now()
+          };
+          (_window16 = window) === null || _window16 === void 0 || _window16.parent.postMessage(closeGameSession, '*');
+          posted = true;
+        }
       }
     }
   }, {
@@ -1505,7 +1522,8 @@ var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
 var CELL = 32;
-var game_version = 'v 0.4.4t';
+var game_version = 'v 0.4.5s';
+var posted = false;
 var sessionID;
 var gameId = generateUUID();
 function getTexturePack() {
@@ -1533,7 +1551,6 @@ window.onload = function () {
       mode: Phaser.Scale.FIT
     },
     audio: {
-      noAudio: true,
       disableWebAudio: true
     }
   };
@@ -1543,19 +1560,19 @@ window.onload = function () {
 };
 sessionID = generateUUID();
 try {
-  var _window16;
+  var _window17;
   var startGameSession = {
     action: 'startGameSession',
     allGameSessionId: sessionID,
     timeStamp: Date.now()
   };
-  (_window16 = window) === null || _window16 === void 0 ? void 0 : _window16.parent.postMessage(startGameSession, '*');
+  (_window17 = window) === null || _window17 === void 0 ? void 0 : _window17.parent.postMessage(startGameSession, '*');
 } catch (er) {
-  var _window17;
+  var _window18;
   var startGameSessionError = {
     action: 'startGameSessionError',
     allGameSessionId: sessionID,
     timeStamp: Date.now()
   };
-  (_window17 = window) === null || _window17 === void 0 ? void 0 : _window17.parent.postMessage(startGameSessionError, '*');
+  (_window18 = window) === null || _window18 === void 0 ? void 0 : _window18.parent.postMessage(startGameSessionError, '*');
 }

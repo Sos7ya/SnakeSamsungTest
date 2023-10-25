@@ -163,13 +163,25 @@ class ScenePause extends Phaser.Scene{
 
     exit(){
         if(gameState.onPause){
-        let closeGameSession = {
-            action: 'closeGameSession',
-            allGameSessionId : sessionID,
-            timeStamp : Date.now()
+            if(!posted){
+                let closeGameSession = {
+                    action: 'closeGameSession',
+                    allGameSessionId : sessionID,
+                    timeStamp : Date.now()
+                    }
+                    let gameOver = {
+                        action: 'gameOver',
+                        allGameSessionId : sessionID,
+                        gameSessionId : startGame.gameSessionId,
+                        score : gameState.score,
+                        timeStamp : Date.now()
+                    }
+            
+                    window?.parent.postMessage(gameOver, '*');
+        
+                window?.parent.postMessage(closeGameSession, '*');
+                posted = true;
             }
-
-        window?.parent.postMessage(closeGameSession, '*');
     }
         
     }

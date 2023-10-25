@@ -146,13 +146,16 @@ class GameOver extends Phaser.Scene{
     }
     exit(){
         if(gameState.isOver){
-            let closeGameSession = {
-                action: 'closeGameSession',
-                allGameSessionId : sessionID,
-                timeStamp : Date.now()
-                }
-    
-            window?.parent.postMessage(closeGameSession, '*');
+            if(!posted){
+                let closeGameSession = {
+                    action: 'closeGameSession',
+                    allGameSessionId : sessionID,
+                    timeStamp : Date.now()
+                    }
+        
+                window?.parent.postMessage(closeGameSession, '*');
+                posted = true;
+            }
         }
         
     }

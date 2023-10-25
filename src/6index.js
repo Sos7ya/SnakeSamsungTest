@@ -7,8 +7,8 @@ var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
 var CELL = 32;
-var game_version = 'v 0.4.4t';
-
+var game_version = 'v 0.4.5s';
+var posted = false;
 var sessionID;
 var gameId = generateUUID();
 
@@ -39,7 +39,6 @@ window.onload = function(){
             mode: Phaser.Scale.FIT
         },
         audio: {
-            noAudio: true,
             disableWebAudio: true,
         }   
     }

@@ -16,6 +16,7 @@ class Preloader extends Phaser.Scene{
             }
             window?.parent.postMessage(startDownloading, '*');
 
+        console.log('Preloader starting!')
         this.loadText = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily:'Nunito-black', fontStyle:'bold', fontSize: '40px', fill: 'white'});
         this.loadText2 = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily:'Nunito', fontStyle:'bold', fontSize: '40px', fill: 'white'});
         this.loadText3 = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily:'RubikOne-Regular', fontStyle:'bold', fontSize: '40px', fill: 'white'});
@@ -120,6 +121,7 @@ class Preloader extends Phaser.Scene{
             }
             window?.parent.postMessage(downloadError, '*')
         }
+        console.log('Preloader Finish!');
 
         this.anims.create({
             key: 'food-animation',

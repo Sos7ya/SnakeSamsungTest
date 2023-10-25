@@ -282,6 +282,8 @@ class Snake extends Entity {
             
 
             if (hitBody && this.onGod == false) {
+                console.log('dead');
+
                 this.alive = false;
                 this.deadSound.play()
                 return false;

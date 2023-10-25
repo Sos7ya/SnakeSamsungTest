@@ -1029,6 +1029,7 @@ window.addEventListener('load', function () {
   var validEvents = ['sn:willmove', 'sn:enter-down', 'sn:enter-up'];
   var eventHandler = function eventHandler(evt) {
     var _evt$detail, _snake, _snake2, _snake3, _snake4;
+    // console.log(evt.type, evt.target, evt.detail);
     if (evt.type == 'sn:enter-down') {
       mainMenu.gameToggle();
       gameOver.gameToggle();

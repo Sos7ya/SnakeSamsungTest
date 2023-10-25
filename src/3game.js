@@ -6,6 +6,9 @@ class SnakeGame extends Phaser.Scene{
     }
 
     create(){
+        console.log('play now!')
+        game_session.action.startGame = new Date().getTime();
+        console.log(game_session.action.startGame)
         gameState.onGame = true
         gameState.onPause = false
         gameState.onMenu = false
@@ -60,6 +63,7 @@ class SnakeGame extends Phaser.Scene{
             }
         })
         this.loadScore();
+        console.log(this.snake);
         this.snake.bodySegments[1].setSize(30,30, true)
         // this.snake.bodySegments[1].depth = this.food.body.depth
         // this.physics.add.collider(this.snake.bodySegments[0], this.food.body, ()=>{this.snake.grow(); this.repositionFood(); this.snake.biteSound.play();gameState.score+=1}, null, this);
@@ -79,6 +83,7 @@ class SnakeGame extends Phaser.Scene{
 
     loadScore(){
         if(localStorage.getItem('heighScore_snake')){
+            console.log(localStorage.getItem('heighScore_snake'));
             this.hieghScoreText = this.add.text(this.scoreText.x + 260, this.scoreText.y, `${JSON.parse(localStorage.getItem('heighScore_snake'))}`, {fontFamily:'Nunito', fontStyle:'bold', fontSize: '40px', fill: 'white', textAlign: 'start' }).setOrigin(0.5);
             this.hieghScoreIcon = this.add.image(this.hieghScoreText.x - 90, this.hieghScoreText.y, 'bestIcon').setDisplaySize(72, 66).setOrigin(0.5);
         }
@@ -133,7 +138,9 @@ class SnakeGame extends Phaser.Scene{
             
             for (let segment of this.snake.bodySegments){
                 ocupate.push({x:segment.x, y: segment.y})
-            }        
+            }
+            console.log(ocupate)
+        
             if (validLocationsX.length > 0) {
                 
                 var pos = {
@@ -152,6 +159,7 @@ class SnakeGame extends Phaser.Scene{
                             x: this.getPositionX(),
                             y: this.getPositionY()
                         }
+                        console.log(pos.x, pos.y)
                     }
                     else if(newpos.x == Math.floor(point.x/CELL) && newpos.y == Math.floor(point.y/CELL)){
                         newpos = {

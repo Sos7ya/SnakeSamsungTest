@@ -11,7 +11,6 @@ class MainMenu extends Phaser.Scene{
     }
 
     create(){
-        console.log('MainMenu is started!')
         this.texturePack = getTexturePack();
         gameState.onMenu = true
         gameState.onGame = false
@@ -74,7 +73,6 @@ class MainMenu extends Phaser.Scene{
 
     loadScore(){
         if(localStorage.getItem('heighScore_snake')){
-            game_session.highscore = JSON.parse(localStorage.getItem('heighScore_snake'));
             this.hieghScoreText = this.add.text(game.config.width/2, game.config.height - 100, `${JSON.parse(localStorage.getItem('heighScore_snake'))}`, { fontFamily:'Rubik-Medium', fontStyle:'normal', fontSize: '64px', fill: '#fff' }).setOrigin(0.5);
             this.hieghScoreTitle = this.add.text(this.hieghScoreText.x, this.hieghScoreText.y-75, 'Рекорд', {fontFamily: 'Rubik-Regular', fontSize: '48px', fill: '#D0DBD1'}).setOrigin(0.5);
         
@@ -138,14 +136,17 @@ class MainMenu extends Phaser.Scene{
     }
     exit(){
         if(gameState.onMenu){
-            let closeGameSession = {
-                action: 'closeGameSession',
-                allGameSessionId : sessionID,
-                timeStamp : Date.now()
+            if(!posted){
+                let closeGameSession = {
+                    action: 'closeGameSession',
+                    allGameSessionId : sessionID,
+                    timeStamp : Date.now()
+                }
+        
+                window?.parent.postMessage(closeGameSession, '*');
+                posted = true;
             }
-    
-            window?.parent.postMessage(closeGameSession, '*');
-        }
+    }
         
     }
 

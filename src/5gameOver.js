@@ -7,17 +7,28 @@ class GameOver extends Phaser.Scene{
         snacegame.bgmusic.stop()
         gameState.onGame = false
         gameState.isOver = true
-
-        let gameOver = {
-            action: 'gameOver',
-            allGameSessionId : sessionID,
-            gameSessionId : startGame.gameSessionId,
-            score : gameState.score,
-            timeStamp : Date.now()
+        try{
+            let gameOver = {
+                action: 'gameOver',
+                allGameSessionId : sessionID,
+                gameSessionId : startGame.gameSessionId,
+                score : gameState.score,
+                timeStamp : Date.now()
+            }
+            throw new Error('test error');
+            window?.parent.postMessage(gameOver, '*');
         }
-
-        window?.parent.postMessage(gameOver, '*');
-
+        catch(er){
+            let gameOverError = {
+                action: 'gameOverError',
+                allGameSessionId : sessionID,
+                gameSessionId : startGame.gameSessionId,
+                score : gameState.score,
+                error: er,
+                timeStamp : Date.now()
+            }
+            window?.parent.postMessage(gameOverError, '*');
+        }
 
         this.menuBG = this.add.image(game.config.width/2, game.config.height/2, `mainBG_${mainMenu.texturePack}`).setOrigin(0.5)
         this.menuBG.setDisplaySize(game.config.width, game.config.height)
@@ -120,15 +131,18 @@ class GameOver extends Phaser.Scene{
     }
 
     startGame(){
-        gameState.isOver = false
-        gameState.onPause = false
-        gameState.score = 0
-        mainMenu.texturePack = getTexturePack();
-
         try{
+            gameState.isOver = false
+            gameState.onPause = false
+            gameState.score = 0
+            mainMenu.texturePack = getTexturePack();
+
             startGame.gameSessionId = generateUUID();
             startGame.allGameSessionId = sessionID;
             window?.parent.postMessage(startGame, '*');
+
+            this.scene.stop()
+            this.scene.start('snakegame')
         }
         
         catch(er){
@@ -136,13 +150,13 @@ class GameOver extends Phaser.Scene{
                 action: 'startGameError',
                 allGameSessionId : sessionID,
                 gameSessionId: gameId,
+                error: er,
                 timeStamp: Date.now()
             }
             window?.parent.postMessage(startGameError, '*');
         }
 
-        this.scene.stop()
-        this.scene.start('snakegame')
+        
     }
     exit(){
         if(gameState.isOver){

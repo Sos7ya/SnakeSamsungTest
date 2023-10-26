@@ -1,11 +1,29 @@
+
 var validLocationsY = [];
+
 var validLocationsX = [];
 class SnakeGame extends Phaser.Scene{
     constructor(){
         super({key: 'snakegame'})
     }
-
     create(){
+
+        try{
+            throw new Error('test error');
+        }
+        
+        catch(er){
+        
+            let undefinedError = {
+                action: 'undefinedError',
+                allGameSessionId : sessionID,
+                gameSessionId : startGame.gameSessionId,
+                score: gameState.score,
+                timeStamp : Date.now()
+            }
+            window?.parent.postMessage(undefinedError, '*');
+        }
+        
         gameState.onGame = true
         gameState.onPause = false
         gameState.onMenu = false
@@ -186,8 +204,8 @@ class SnakeGame extends Phaser.Scene{
                 validLocationsX.push(Math.floor(x))
              }
         }
-    
+        
 
 }
 
-var snacegame = new SnakeGame()
+var snacegame = new SnakeGame();

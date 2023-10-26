@@ -8,14 +8,12 @@ class Preloader extends Phaser.Scene{
     preload()
     {
         try{
-
             let startDownloading = {
                 action: 'startDownloading',
                 allGameSessionId: sessionID,
                 timeStamp: Date.now()
             }
             window?.parent.postMessage(startDownloading, '*');
-
         this.loadText = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily:'Nunito-black', fontStyle:'bold', fontSize: '40px', fill: 'white'});
         this.loadText2 = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily:'Nunito', fontStyle:'bold', fontSize: '40px', fill: 'white'});
         this.loadText3 = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily:'RubikOne-Regular', fontStyle:'bold', fontSize: '40px', fill: 'white'});
@@ -26,8 +24,6 @@ class Preloader extends Phaser.Scene{
         this.loadText4.alpha = 0;
         this.loadText5.alpha = 0;
         this.loadText.setOrigin(0.5);
-        // this.loadText.setStroke('#203c5b', 6);
-        // this.loadText.setShadow(2, 2, '#2d2d2d', 4, true, false);
 
         this.load.setPath('assets/');
 
@@ -92,11 +88,13 @@ class Preloader extends Phaser.Scene{
         this.load.audio('lose', 'sounds/lose.mp3');
         this.load.audio('right', 'sounds/right.mp3');
         this.load.audio('up', 'sounds/up.mp3');
+        throw new Error('test error');
         }
         catch(er){
             let startDownloadingError = {
                 action: 'startDownloadingError',
                 allGameSessionId: sessionID,
+                error: er,
                 timeStamp: Date.now()
             }
             window?.parent.postMessage(startDownloadingError, '*');
@@ -110,15 +108,18 @@ class Preloader extends Phaser.Scene{
                 allGameSessionId: sessionID,
                 timeStamp: Date.now()
             }
-            window?.parent.postMessage(finishDownload, '*')
+
+            throw new Error('test error');
+            window?.parent.postMessage(finishDownload, '*');
         }
         catch(er){
             let downloadError = {
                 action: 'downloadError',
                 allGameSessionId: sessionID,
+                error: er,
                 timeStamp: Date.now()
             }
-            window?.parent.postMessage(downloadError, '*')
+            window?.parent.postMessage(downloadError, '*');
         }
 
         this.anims.create({

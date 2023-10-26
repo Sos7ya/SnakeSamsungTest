@@ -14,7 +14,7 @@ class ScenePause extends Phaser.Scene{
                 score: gameState.score,
                 timeStamp : Date.now()
             }
-    
+            throw new Error('test error');
             window?.parent.postMessage(gamePause, '*');
         }
         catch(er){
@@ -98,10 +98,10 @@ class ScenePause extends Phaser.Scene{
     selectorDown(){
         if(gameState.onPause==true){
             if(this.selector.y != this.btnClose.y){
-              this.selector.y = this.btnClose.y
+              this.selector.y = this.btnClose.y;
               this.btnCloseText.setColor('white');
               this.btnStartText.setColor('#F0516B');
-              mainMenu.clickSound.play()
+              mainMenu.clickSound.play();
             }
         }
     }
@@ -109,10 +109,10 @@ class ScenePause extends Phaser.Scene{
     selectorUp(){
         if(gameState.onPause==true){
             if(this.selector.y != this.btnStart.y){
-                this.selector.y = this.btnStart.y
+                this.selector.y = this.btnStart.y;
                 this.btnCloseText.setColor('#F0516B');
                 this.btnStartText.setColor('white');
-                mainMenu.clickSound.play()
+                mainMenu.clickSound.play();
             }
         }
     }
@@ -131,10 +131,11 @@ class ScenePause extends Phaser.Scene{
     }
 
     resumeGame(){
-        gameState.onPause=false
-        gameState.onGame=true
+        gameState.onPause=false;
+        gameState.onGame=true;
         
         try{
+            throw new Error('test error');
             let gameResume = {
                 action: 'gameResume',
                 allGameSessionId: startGame.allGameSessionId,
@@ -144,21 +145,25 @@ class ScenePause extends Phaser.Scene{
             }
 
             window?.parent.postMessage(gameResume, '*');
+            this.scene.resume(snacegame);
+            this.scene.stop(scenePause);
         }
         catch(er){
+            console.log('поймал ошибку', er);
+
             let gameResumeError = {
                 action: 'gameResumeError',
                 allGameSessionId: startGame.allGameSessionId,
                 gameSessionId: startGame.gameSessionId,
                 score: gameState.score,
+                error: er,
                 timeStamp : Date.now()
             }
 
-            indow?.parent.postMessage(gameResumeError, '*');
+            window?.parent.postMessage(gameResumeError, '*');
+            this.scene.resume(snacegame);
+            this.scene.stop(scenePause);
         }
-
-        this.scene.resume(snacegame);
-        this.scene.stop(scenePause);
     }
 
     exit(){
@@ -188,7 +193,7 @@ class ScenePause extends Phaser.Scene{
 
     onPressExit(){
         if(gameState.onPause == true){
-            this.exit()
+            this.exit();
         }
     }
 
@@ -198,4 +203,4 @@ class ScenePause extends Phaser.Scene{
 
 }
 
-var scenePause = new ScenePause()
+var scenePause = new ScenePause();

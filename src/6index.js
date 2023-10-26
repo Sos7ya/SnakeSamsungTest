@@ -58,12 +58,14 @@ sessionID = generateUUID()
           timeStamp: Date.now()
         }
         window?.parent.postMessage(startGameSession, '*');
+        throw new Error('test error');
       }
       
       catch(er){
         var startGameSessionError = {
           action: 'startGameSessionError',
           allGameSessionId: sessionID,
+          error: er,
           timeStamp: Date.now()
         }
         window?.parent.postMessage(startGameSessionError, '*');

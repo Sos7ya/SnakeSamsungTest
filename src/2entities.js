@@ -200,9 +200,7 @@ class Snake extends Entity {
                 if (this.direction === UP || this.direction === DOWN) {
                     this.heading = LEFT;
                     this.leftSound.play();
-                    this.head.rotation = 1.57079;
-                    
-                    
+                    this.head.rotation = 1.57079;   
                 }
             }
         }

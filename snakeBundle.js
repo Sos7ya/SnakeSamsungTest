@@ -1278,7 +1278,6 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
         this.scene.stop(scenePause);
       } catch (er) {
         var _window12;
-        console.log('поймал ошибку', er);
         var gameResumeError = {
           action: 'gameResumeError',
           allGameSessionId: _startGame.allGameSessionId,

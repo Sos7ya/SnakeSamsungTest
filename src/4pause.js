@@ -150,8 +150,6 @@ class ScenePause extends Phaser.Scene{
             this.scene.stop(scenePause);
         }
         catch(er){
-            console.log('поймал ошибку', er);
-
             let gameResumeError = {
                 action: 'gameResumeError',
                 allGameSessionId: startGame.allGameSessionId,

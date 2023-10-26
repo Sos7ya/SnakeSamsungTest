@@ -653,7 +653,7 @@ var Snake = /*#__PURE__*/function (_Entity3) {
   }, {
     key: "update",
     value: function update(time) {
-      if (gameState.onGame == true) {
+      if (gameState.onGame === true) {
         this.updateBodyGraphics();
         if (time >= this.moveTime) {
           return this.move(time);
@@ -663,7 +663,7 @@ var Snake = /*#__PURE__*/function (_Entity3) {
   }, {
     key: "faceLeft",
     value: function faceLeft() {
-      if (gameState.onGame == true) {
+      if (gameState.onGame === true) {
         if (this.direction === UP || this.direction === DOWN) {
           this.heading = LEFT;
           this.leftSound.play();
@@ -674,7 +674,7 @@ var Snake = /*#__PURE__*/function (_Entity3) {
   }, {
     key: "faceRight",
     value: function faceRight() {
-      if (gameState.onGame == true) {
+      if (gameState.onGame === true) {
         if (this.direction === UP || this.direction === DOWN) {
           this.heading = RIGHT;
           this.rightSound.play();
@@ -685,7 +685,7 @@ var Snake = /*#__PURE__*/function (_Entity3) {
   }, {
     key: "faceUp",
     value: function faceUp() {
-      if (gameState.onGame == true) {
+      if (gameState.onGame === true) {
         if (this.direction === LEFT || this.direction === RIGHT) {
           this.heading = UP;
           this.upSound.play();
@@ -696,7 +696,7 @@ var Snake = /*#__PURE__*/function (_Entity3) {
   }, {
     key: "faceDown",
     value: function faceDown() {
-      if (gameState.onGame == true) {
+      if (gameState.onGame === true) {
         if (this.direction === LEFT || this.direction === RIGHT) {
           this.heading = DOWN;
           this.downSound.play();
@@ -707,53 +707,54 @@ var Snake = /*#__PURE__*/function (_Entity3) {
   }, {
     key: "move",
     value: function move(time) {
-      if (gameState.onGame == true) {
-        if (this.onGod === false) {
-          switch (this.heading) {
-            case LEFT:
-              this.headPosition.x = Phaser.Math.Clamp(this.headPosition.x - 1, 3, game.config.width / CELL - 3);
-              break;
-            case RIGHT:
-              this.headPosition.x = Phaser.Math.Clamp(this.headPosition.x + 1, 3, game.config.width / CELL - 3);
-              break;
-            case UP:
-              this.headPosition.y = Phaser.Math.Clamp(this.headPosition.y - 1, 6, Math.floor(game.config.height / CELL - 2));
-              break;
-            case DOWN:
-              this.headPosition.y = Phaser.Math.Clamp(this.headPosition.y + 1, 6, Math.floor(game.config.height / CELL - 2));
-              break;
-          }
-        } else if (this.onGod == true) {
-          switch (this.heading) {
-            case LEFT:
-              this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x - 1, 3, Math.floor(game.config.width / CELL - 2));
-              break;
-            case RIGHT:
-              this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x + 1, 3, Math.floor(game.config.width / CELL - 2));
-              break;
-            case UP:
-              this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y - 1, 6, Math.floor(game.config.height / CELL - 1));
-              break;
-            case DOWN:
-              this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y + 1, 6, Math.floor(game.config.height / CELL - 1));
-              break;
-          }
+      if (gameState.onGame !== true) {
+        return false;
+      }
+      if (this.onGod === false) {
+        switch (this.heading) {
+          case LEFT:
+            this.headPosition.x = Phaser.Math.Clamp(this.headPosition.x - 1, 3, game.config.width / CELL - 3);
+            break;
+          case RIGHT:
+            this.headPosition.x = Phaser.Math.Clamp(this.headPosition.x + 1, 3, game.config.width / CELL - 3);
+            break;
+          case UP:
+            this.headPosition.y = Phaser.Math.Clamp(this.headPosition.y - 1, 6, Math.floor(game.config.height / CELL - 2));
+            break;
+          case DOWN:
+            this.headPosition.y = Phaser.Math.Clamp(this.headPosition.y + 1, 6, Math.floor(game.config.height / CELL - 2));
+            break;
         }
-        this.direction = this.heading;
-        Phaser.Actions.ShiftPosition(this.body.children.entries, this.headPosition.x * CELL, this.headPosition.y * CELL, 1, this.end);
-        var hitBody = Phaser.Actions.GetFirst(this.bodySegments, {
-          x: this.head.x,
-          y: this.head.y
-        }, 1);
-        if (hitBody && this.onGod == false) {
-          this.alive = false;
-          this.deadSound.play();
-          return false;
-        } else {
-          this.moveTime = time + this.speed;
-          this.alive = true;
-          return true;
+      } else {
+        switch (this.heading) {
+          case LEFT:
+            this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x - 1, 3, Math.floor(game.config.width / CELL - 2));
+            break;
+          case RIGHT:
+            this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x + 1, 3, Math.floor(game.config.width / CELL - 2));
+            break;
+          case UP:
+            this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y - 1, 6, Math.floor(game.config.height / CELL - 1));
+            break;
+          case DOWN:
+            this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y + 1, 6, Math.floor(game.config.height / CELL - 1));
+            break;
         }
+      }
+      this.direction = this.heading;
+      Phaser.Actions.ShiftPosition(this.body.children.entries, this.headPosition.x * CELL, this.headPosition.y * CELL, 1, this.end);
+      var hitBody = Phaser.Actions.GetFirst(this.bodySegments, {
+        x: this.head.x,
+        y: this.head.y
+      }, 1);
+      if (hitBody && this.onGod === false) {
+        this.alive = false;
+        this.deadSound.play();
+        return false;
+      } else {
+        this.moveTime = time + this.speed;
+        this.alive = true;
+        return true;
       }
     }
   }, {
@@ -1557,7 +1558,7 @@ var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
 var CELL = 32;
-var game_version = 'v 0.4.5s';
+var game_version = 'v 0.4.6s';
 var posted = false;
 var sessionID;
 var gameId = generateUUID();

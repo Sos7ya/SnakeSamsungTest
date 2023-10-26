@@ -182,7 +182,7 @@ updateBodyGraphics() {
           }
 
         update(time) {
-            if(gameState.onGame==true){
+            if(gameState.onGame===true){
                 this.updateBodyGraphics();
                 if (time >= this.moveTime) {
                     return this.move(time);
@@ -193,7 +193,7 @@ updateBodyGraphics() {
 
         faceLeft()
         {
-            if(gameState.onGame==true){
+            if(gameState.onGame===true){
                 if (this.direction === UP || this.direction === DOWN) {
                     this.heading = LEFT;
                     this.leftSound.play();
@@ -204,7 +204,7 @@ updateBodyGraphics() {
 
         faceRight() 
         {
-            if(gameState.onGame==true){
+            if(gameState.onGame===true){
                 if (this.direction === UP || this.direction === DOWN) {
                     this.heading = RIGHT;
                     this.rightSound.play();
@@ -215,7 +215,7 @@ updateBodyGraphics() {
 
         faceUp()
         {
-            if(gameState.onGame==true){
+            if(gameState.onGame===true){
                 if (this.direction === LEFT || this.direction === RIGHT) {
                     this.heading = UP;
                     this.upSound.play();
@@ -225,7 +225,7 @@ updateBodyGraphics() {
         };
         faceDown()
         {
-            if(gameState.onGame==true){
+            if(gameState.onGame===true){
                 if (this.direction === LEFT || this.direction === RIGHT) {
                     this.heading = DOWN;
                     this.downSound.play();
@@ -234,62 +234,61 @@ updateBodyGraphics() {
             }
         }
 
-        move(time) {
-            if(gameState.onGame==true){
-                if(this.onGod===false){
-                    switch (this.heading) {
-                        case LEFT:
-                            this.headPosition.x = Phaser.Math.Clamp(this.headPosition.x - 1, 3, game.config.width/CELL - 3);
-                        break;
-                        case RIGHT:
-                            this.headPosition.x = Phaser.Math.Clamp(this.headPosition.x + 1, 3, game.config.width/CELL - 3);
-                        break;
-                        case UP:
-                            this.headPosition.y = Phaser.Math.Clamp(this.headPosition.y - 1, 6, Math.floor(game.config.height/CELL - 2));
-                        break;
-                        case DOWN:
-                            this.headPosition.y = Phaser.Math.Clamp(this.headPosition.y + 1, 6, Math.floor(game.config.height/CELL - 2));
-                        break;
-                    }
-                }
-                else if(this.onGod == true){
-                    switch (this.heading) {
-                        case LEFT:
-                            this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x - 1, 3, Math.floor(game.config.width/CELL - 2));
-                            break;
-                        case RIGHT:
-                            this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x + 1, 3, Math.floor(game.config.width/CELL - 2));
-                            break;
-                        case UP:
-                            this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y - 1, 6, Math.floor(game.config.height/CELL - 1));
-                            break;
-                        case DOWN:
-                            this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y + 1, 6, Math.floor(game.config.height/CELL - 1));
-                            break;
-                    }
-                }
+move(time) {
+    if (gameState.onGame !== true) {
+        return false;
+    }
 
-            this.direction = this.heading;
-            Phaser.Actions.ShiftPosition(this.body.children.entries, this.headPosition.x*CELL, this.headPosition.y*CELL, 1, this.end);
-
-
-            var hitBody = Phaser.Actions.GetFirst(this.bodySegments, { x: this.head.x, y: this.head.y }, 1);
-            
-
-            if (hitBody && this.onGod == false) {
-                this.alive = false;
-                this.deadSound.play()
-                return false;
-            }
-            
-            else {
-                this.moveTime = time + this.speed;
-            
-                this.alive = true;
-                return true;
-            }
+    if (this.onGod === false) {
+        switch (this.heading) {
+            case LEFT:
+                this.headPosition.x = Phaser.Math.Clamp(this.headPosition.x - 1, 3, game.config.width / CELL - 3);
+                break;
+            case RIGHT:
+                this.headPosition.x = Phaser.Math.Clamp(this.headPosition.x + 1, 3, game.config.width / CELL - 3);
+                break;
+            case UP:
+                this.headPosition.y = Phaser.Math.Clamp(this.headPosition.y - 1, 6, Math.floor(game.config.height / CELL - 2));
+                break;
+            case DOWN:
+                this.headPosition.y = Phaser.Math.Clamp(this.headPosition.y + 1, 6, Math.floor(game.config.height / CELL - 2));
+                break;
+        }
+    } else {
+        switch (this.heading) {
+            case LEFT:
+                this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x - 1, 3, Math.floor(game.config.width / CELL - 2));
+                break;
+            case RIGHT:
+                this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x + 1, 3, Math.floor(game.config.width / CELL - 2));
+                break;
+            case UP:
+                this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y - 1, 6, Math.floor(game.config.height / CELL - 1));
+                break;
+            case DOWN:
+                this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y + 1, 6, Math.floor(game.config.height / CELL - 1));
+                break;
         }
     }
+
+    this.direction = this.heading;
+    Phaser.Actions.ShiftPosition(this.body.children.entries, this.headPosition.x * CELL, this.headPosition.y * CELL, 1, this.end);
+
+    const hitBody = Phaser.Actions.GetFirst(this.bodySegments, {
+        x: this.head.x,
+        y: this.head.y
+    }, 1);
+
+    if (hitBody && this.onGod === false) {
+        this.alive = false;
+        this.deadSound.play();
+        return false;
+    } else {
+        this.moveTime = time + this.speed;
+        this.alive = true;
+        return true;
+    }
+}
 
     grow() {
         this.bodySegments[1].setSize(30, 30, true)

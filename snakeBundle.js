@@ -878,6 +878,7 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
           allGameSessionId: sessionID,
           gameSessionId: _startGame.gameSessionId,
           score: gameState.score,
+          error: er,
           timeStamp: Date.now()
         };
         (_window8 = window) === null || _window8 === void 0 || _window8.parent.postMessage(undefinedError, '*');
@@ -1133,6 +1134,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           allGameSessionId: _startGame.allGameSessionId,
           gameSessionId: _startGame.gameSessionId,
           score: gameState.score,
+          error: er,
           timeStamp: Date.now()
         };
         (_window10 = window) === null || _window10 === void 0 || _window10.parent.postMessage(gamePauseError, '*');

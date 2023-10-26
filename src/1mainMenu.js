@@ -122,7 +122,6 @@ class MainMenu extends Phaser.Scene{
                 startGame.allGameSessionId = sessionID;
                 window?.parent.postMessage(startGame, '*');
                 this.scene.start('snakegame');
-                throw new Error('test error');
             }
             catch(er){
                 var startGameError = {

@@ -16,7 +16,6 @@ class GameOver extends Phaser.Scene{
                 timeStamp : Date.now()
             }
             window?.parent.postMessage(gameOver, '*');
-            throw new Error('test error');
         }
         catch(er){
             let gameOverError = {

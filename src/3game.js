@@ -9,21 +9,7 @@ class SnakeGame extends Phaser.Scene{
     create(){
 
         try{
-            throw new Error('test error');
-        }
         
-        catch(er){
-        
-            let undefinedError = {
-                action: 'undefinedError',
-                allGameSessionId : sessionID,
-                gameSessionId : startGame.gameSessionId,
-                score: gameState.score,
-                error: er.message,
-                timeStamp : Date.now()
-            }
-            window?.parent.postMessage(undefinedError, '*');
-        }
 
         gameState.onGame = true
         gameState.onPause = false
@@ -88,6 +74,20 @@ class SnakeGame extends Phaser.Scene{
         this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, `${game_version}`, { fontFamily:'Nunito-black', fontStyle:'bold', fontSize: '30px', fill: '#fff' }).setOrigin(0.5);
         this.getField()
     }
+        
+    catch(er){
+    
+        let undefinedError = {
+            action: 'undefinedError',
+            allGameSessionId : sessionID,
+            gameSessionId : startGame.gameSessionId,
+            score: gameState.score,
+            error: er.message,
+            timeStamp : Date.now()
+        }
+        window?.parent.postMessage(undefinedError, '*');
+    }
+    }
 
     // soundOff(){
     //     if(this.bgmusic.volume > 0){
@@ -129,7 +129,7 @@ class SnakeGame extends Phaser.Scene{
         
         if (snake.update(time)) {
             
-            if(this.bonus!=undefined && snake.collideWithBonus(this.bonus)){
+            if(this.bonus!==undefined && snake.collideWithBonus(this.bonus)){
                 this.bonus.destroy();
             }
             for(let food of this.foodArray){
@@ -147,9 +147,7 @@ class SnakeGame extends Phaser.Scene{
         
     }
         repositionFood(food) {
-            let ocupate = []
-            
-            
+            let ocupate = [];
             for (let segment of this.snake.bodySegments){
                 ocupate.push({x:segment.x, y: segment.y})
             }        
@@ -180,7 +178,9 @@ class SnakeGame extends Phaser.Scene{
                     }
                 }
                 food.body.setPosition(pos.x*CELL, pos.y*CELL);
-                this.addBonus(newpos.x, newpos.y, Math.floor(Math.random()*2));
+                if(gameState.score>0 && gameState.score%10 === 0){
+                    this.addBonus(newpos.x, newpos.y, Math.floor(Math.random()*2));
+                }
                 return true;
             } else {
                 return false;

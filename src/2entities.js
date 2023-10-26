@@ -358,15 +358,11 @@ move(time) {
         }
     };
 
-    updateGrid(grid) {
-        for (const segment of this.body.getChildren()){
-            const y = segment.y / CELL;
-            const x = segment.x / CELL;
-            
-            // grid[y] = {};
-            grid[x][y] = false;
-          }
+updateGrid(grid) {
+  this.body.getChildren().forEach(segment => {
+    grid[segment.x / CELL][segment.y / CELL] = false;
+  });
 
-        return grid;
-    }
+  return grid;
+}
 }

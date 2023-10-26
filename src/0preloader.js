@@ -88,7 +88,6 @@ class Preloader extends Phaser.Scene{
         this.load.audio('lose', 'sounds/lose.mp3');
         this.load.audio('right', 'sounds/right.mp3');
         this.load.audio('up', 'sounds/up.mp3');
-        throw new Error('test error');
         }
         catch(er){
             let startDownloadingError = {
@@ -109,7 +108,6 @@ class Preloader extends Phaser.Scene{
                 timeStamp: Date.now()
             }
             window?.parent.postMessage(finishDownload, '*');
-            throw new Error('test error');
         }
         catch(er){
             let downloadError = {

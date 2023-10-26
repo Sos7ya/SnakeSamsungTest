@@ -128,7 +128,6 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
         this.load.audio('lose', 'sounds/lose.mp3');
         this.load.audio('right', 'sounds/right.mp3');
         this.load.audio('up', 'sounds/up.mp3');
-        throw new Error('test error');
       } catch (er) {
         var _window2;
         var startDownloadingError = {
@@ -151,7 +150,6 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
           timeStamp: Date.now()
         };
         (_window3 = window) === null || _window3 === void 0 || _window3.parent.postMessage(finishDownload, '*');
-        throw new Error('test error');
       } catch (er) {
         var _window4;
         var downloadError = {
@@ -424,7 +422,6 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
           _startGame.allGameSessionId = sessionID;
           (_window5 = window) === null || _window5 === void 0 || _window5.parent.postMessage(_startGame, '*');
           this.scene.start('snakegame');
-          throw new Error('test error');
         } catch (er) {
           var _window6;
           var startGameError = {
@@ -831,22 +828,9 @@ var Snake = /*#__PURE__*/function (_Entity3) {
   }, {
     key: "updateGrid",
     value: function updateGrid(grid) {
-      var _iterator = _createForOfIteratorHelper(this.body.getChildren()),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var segment = _step.value;
-          var y = segment.y / CELL;
-          var x = segment.x / CELL;
-
-          // grid[y] = {};
-          grid[x][y] = false;
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
+      this.body.getChildren().forEach(function (segment) {
+        grid[segment.x / CELL][segment.y / CELL] = false;
+      });
       return grid;
     }
   }]);
@@ -868,7 +852,67 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
     value: function create() {
       var _this10 = this;
       try {
-        throw new Error('test error');
+        gameState.onGame = true;
+        gameState.onPause = false;
+        gameState.onMenu = false;
+        this.texturePack = mainMenu.texturePack;
+        this.bgGraph = this.add.graphics();
+        switch (mainMenu.texturePack) {
+          case 0:
+            this.bgGraph.fillStyle(0x4ccc64);
+            break;
+          case 1:
+            this.bgGraph.fillStyle(0x3E81AF);
+            break;
+          case 2:
+            this.bgGraph.fillStyle(0x8080D8);
+            break;
+        }
+        this.bgGraph.fillRect(0, 0, game.config.width, game.config.height);
+        this.backGround = this.add.image(game.config.width / 2, game.config.height / 2, "background_".concat(this.texturePack)).setOrigin(0.5, 0.51);
+        this.backGround.setDisplaySize(game.config.width, game.config.height);
+        this.bgmusic = this.sound.add('background-music', {
+          loop: false,
+          volume: 0.5
+        });
+        this.marker = 0;
+        this.bgmusic.play();
+        this.scoreText = this.add.text(game.config.width / 2 - 100, 55, "".concat(gameState.score), {
+          fontFamily: 'Nunito',
+          fontStyle: 'bold',
+          fontSize: '40px',
+          fill: 'white',
+          textAlign: 'start'
+        }).setOrigin(0.5);
+        this.scoreIcon = this.add.image(this.scoreText.x - 90, this.scoreText.y, 'scoreIcon').setOrigin(0.5).setDisplaySize(60, 66);
+        this.gameInfo = this.add.image(290, 60, 'info').setOrigin(0.5);
+        this.foodArray = [];
+        for (var i = 0; i < 1; i++) {
+          var _food = new Food(snacegame, 30, 20, 'food');
+          this.foodArray.push(_food);
+        }
+        this.snake = snake = new Snake(snacegame, 20, 20, 'body_0');
+        this.snake.grow();
+        this.snake.grow();
+        document.addEventListener('keydown', function (e) {
+          if ((e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) && gameState.onGame) {
+            _this10.pause();
+          }
+        });
+        this.loadScore();
+        this.snake.bodySegments[1].setSize(30, 30, true);
+        // this.snake.bodySegments[1].depth = this.food.body.depth
+        // this.physics.add.collider(this.snake.bodySegments[0], this.food.body, ()=>{this.snake.grow(); this.repositionFood(); this.snake.biteSound.play();gameState.score+=1}, null, this);
+
+        // this.stopSound =  setInterval(()=>{this.soundOff(); this.marker >= 5 ? clearInterval(this.stopSound) && this.bgmusic.stop() : null}, 1000);
+
+        this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, "".concat(game_version), {
+          fontFamily: 'Nunito-black',
+          fontStyle: 'bold',
+          fontSize: '30px',
+          fill: '#fff'
+        }).setOrigin(0.5);
+        this.getField();
       } catch (er) {
         var _window8;
         var undefinedError = {
@@ -881,67 +925,6 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
         };
         (_window8 = window) === null || _window8 === void 0 || _window8.parent.postMessage(undefinedError, '*');
       }
-      gameState.onGame = true;
-      gameState.onPause = false;
-      gameState.onMenu = false;
-      this.texturePack = mainMenu.texturePack;
-      this.bgGraph = this.add.graphics();
-      switch (mainMenu.texturePack) {
-        case 0:
-          this.bgGraph.fillStyle(0x4ccc64);
-          break;
-        case 1:
-          this.bgGraph.fillStyle(0x3E81AF);
-          break;
-        case 2:
-          this.bgGraph.fillStyle(0x8080D8);
-          break;
-      }
-      this.bgGraph.fillRect(0, 0, game.config.width, game.config.height);
-      this.backGround = this.add.image(game.config.width / 2, game.config.height / 2, "background_".concat(this.texturePack)).setOrigin(0.5, 0.51);
-      this.backGround.setDisplaySize(game.config.width, game.config.height);
-      this.bgmusic = this.sound.add('background-music', {
-        loop: false,
-        volume: 0.5
-      });
-      this.marker = 0;
-      this.bgmusic.play();
-      this.scoreText = this.add.text(game.config.width / 2 - 100, 55, "".concat(gameState.score), {
-        fontFamily: 'Nunito',
-        fontStyle: 'bold',
-        fontSize: '40px',
-        fill: 'white',
-        textAlign: 'start'
-      }).setOrigin(0.5);
-      this.scoreIcon = this.add.image(this.scoreText.x - 90, this.scoreText.y, 'scoreIcon').setOrigin(0.5).setDisplaySize(60, 66);
-      this.gameInfo = this.add.image(290, 60, 'info').setOrigin(0.5);
-      this.foodArray = [];
-      for (var i = 0; i < 1; i++) {
-        var _food = new Food(snacegame, 30, 20, 'food');
-        this.foodArray.push(_food);
-      }
-      this.snake = snake = new Snake(snacegame, 20, 20, 'body_0');
-      this.snake.grow();
-      this.snake.grow();
-      document.addEventListener('keydown', function (e) {
-        if ((e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) && gameState.onGame) {
-          _this10.pause();
-        }
-      });
-      this.loadScore();
-      this.snake.bodySegments[1].setSize(30, 30, true);
-      // this.snake.bodySegments[1].depth = this.food.body.depth
-      // this.physics.add.collider(this.snake.bodySegments[0], this.food.body, ()=>{this.snake.grow(); this.repositionFood(); this.snake.biteSound.play();gameState.score+=1}, null, this);
-
-      // this.stopSound =  setInterval(()=>{this.soundOff(); this.marker >= 5 ? clearInterval(this.stopSound) && this.bgmusic.stop() : null}, 1000);
-
-      this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, "".concat(game_version), {
-        fontFamily: 'Nunito-black',
-        fontStyle: 'bold',
-        fontSize: '30px',
-        fill: '#fff'
-      }).setOrigin(0.5);
-      this.getField();
     }
 
     // soundOff(){
@@ -992,23 +975,23 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
       // game_session.score = gameState.score
 
       if (snake.update(time)) {
-        if (this.bonus != undefined && snake.collideWithBonus(this.bonus)) {
+        if (this.bonus !== undefined && snake.collideWithBonus(this.bonus)) {
           this.bonus.destroy();
         }
-        var _iterator2 = _createForOfIteratorHelper(this.foodArray),
-          _step2;
+        var _iterator = _createForOfIteratorHelper(this.foodArray),
+          _step;
         try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var _food2 = _step2.value;
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var _food2 = _step.value;
             if (snake.collideWithFood(_food2)) {
               this.repositionFood(_food2);
               gameState.score += 1;
             }
           }
         } catch (err) {
-          _iterator2.e(err);
+          _iterator.e(err);
         } finally {
-          _iterator2.f();
+          _iterator.f();
         }
       }
       if (!snake.alive) {
@@ -1020,20 +1003,20 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
     key: "repositionFood",
     value: function repositionFood(food) {
       var ocupate = [];
-      var _iterator3 = _createForOfIteratorHelper(this.snake.bodySegments),
-        _step3;
+      var _iterator2 = _createForOfIteratorHelper(this.snake.bodySegments),
+        _step2;
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var segment = _step3.value;
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var segment = _step2.value;
           ocupate.push({
             x: segment.x,
             y: segment.y
           });
         }
       } catch (err) {
-        _iterator3.e(err);
+        _iterator2.e(err);
       } finally {
-        _iterator3.f();
+        _iterator2.f();
       }
       if (validLocationsX.length > 0) {
         var pos = {
@@ -1044,11 +1027,11 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
           x: this.getPositionX(),
           y: this.getPositionY()
         };
-        var _iterator4 = _createForOfIteratorHelper(ocupate),
-          _step4;
+        var _iterator3 = _createForOfIteratorHelper(ocupate),
+          _step3;
         try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            var point = _step4.value;
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var point = _step3.value;
             if (pos.x == Math.floor(point.x / CELL) && pos.y == Math.floor(point.y / CELL)) {
               pos = {
                 x: this.getPositionX(),
@@ -1062,12 +1045,14 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
             }
           }
         } catch (err) {
-          _iterator4.e(err);
+          _iterator3.e(err);
         } finally {
-          _iterator4.f();
+          _iterator3.f();
         }
         food.body.setPosition(pos.x * CELL, pos.y * CELL);
-        this.addBonus(newpos.x, newpos.y, Math.floor(Math.random() * 2));
+        if (gameState.score > 0 && gameState.score % 10 === 0) {
+          this.addBonus(newpos.x, newpos.y, Math.floor(Math.random() * 2));
+        }
         return true;
       } else {
         return false;
@@ -1124,7 +1109,6 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           timeStamp: Date.now()
         };
         (_window9 = window) === null || _window9 === void 0 || _window9.parent.postMessage(gamePause, '*');
-        throw new Error('test error');
       } catch (er) {
         var _window10;
         var gamePauseError = {
@@ -1263,7 +1247,6 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
       gameState.onGame = true;
       try {
         var _window11;
-        throw new Error('test error');
         var gameResume = {
           action: 'gameResume',
           allGameSessionId: _startGame.allGameSessionId,
@@ -1353,7 +1336,6 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           timeStamp: Date.now()
         };
         (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(_gameOver2, '*');
-        throw new Error('test error');
       } catch (er) {
         var _window16;
         var gameOverError = {
@@ -1602,8 +1584,7 @@ try {
     allGameSessionId: sessionID,
     timeStamp: Date.now()
   };
-  (_window20 = window) === null || _window20 === void 0 || _window20.parent.postMessage(startGameSession, '*');
-  throw new Error('test error');
+  (_window20 = window) === null || _window20 === void 0 ? void 0 : _window20.parent.postMessage(startGameSession, '*');
 } catch (er) {
   var _window21;
   var startGameSessionError = {

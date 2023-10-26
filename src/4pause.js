@@ -15,7 +15,6 @@ class ScenePause extends Phaser.Scene{
                 timeStamp : Date.now()
             }
             window?.parent.postMessage(gamePause, '*');
-            throw new Error('test error');
         }
         catch(er){
             let gamePauseError = {
@@ -136,7 +135,6 @@ class ScenePause extends Phaser.Scene{
         gameState.onGame=true;
         
         try{
-            throw new Error('test error');
             let gameResume = {
                 action: 'gameResume',
                 allGameSessionId: startGame.allGameSessionId,

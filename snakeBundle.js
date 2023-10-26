@@ -134,7 +134,6 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
         var startDownloadingError = {
           action: 'startDownloadingError',
           allGameSessionId: sessionID,
-          error: er,
           timeStamp: Date.now()
         };
         (_window2 = window) === null || _window2 === void 0 || _window2.parent.postMessage(startDownloadingError, '*');

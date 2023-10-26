@@ -69,4 +69,4 @@ sessionID = generateUUID()
           timeStamp: Date.now()
         }
         window?.parent.postMessage(startGameSessionError, '*');
-      }
+    }

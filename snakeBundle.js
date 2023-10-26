@@ -150,8 +150,8 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
           allGameSessionId: sessionID,
           timeStamp: Date.now()
         };
-        throw new Error('test error');
         (_window3 = window) === null || _window3 === void 0 || _window3.parent.postMessage(finishDownload, '*');
+        throw new Error('test error');
       } catch (er) {
         var _window4;
         var downloadError = {
@@ -590,27 +590,18 @@ var Snake = /*#__PURE__*/function (_Entity3) {
       var points = [this.bodySegments[0]];
       var horizontal = true;
       for (var i = 1; i < this.bodySegments.length - 1; i++) {
-        if (horizontal) {
-          if (this.bodySegments[i].y != points[points.length - 1].y) {
-            points.push(this.bodySegments[i - 1]);
-            horizontal = false;
-          }
-        } else {
-          if (this.bodySegments[i].x != points[points.length - 1].x) {
-            points.push(this.bodySegments[i - 1]);
-            horizontal = true;
-          }
+        var currentSegment = this.bodySegments[i];
+        var previousSegment = this.bodySegments[i - 1];
+        if (horizontal && currentSegment.y !== points[points.length - 1].y || !horizontal && currentSegment.x !== points[points.length - 1].x) {
+          points.push(previousSegment);
+          horizontal = !horizontal;
         }
-        var x1 = this.bodySegments[i].x;
-        var y1 = this.bodySegments[i].y;
-        var x2 = this.bodySegments[i - 1].x;
-        var y2 = this.bodySegments[i - 1].y;
-
-        //Расстояние между текущим кусок тела и прошлым больше 1
-        if (!(Math.abs(x1 - x2) == CELL ^ Math.abs(y1 - y2) == CELL)) {
-          points.push(this.bodySegments[i - 1]);
+        var distanceX = Math.abs(currentSegment.x - previousSegment.x);
+        var distanceY = Math.abs(currentSegment.y - previousSegment.y);
+        if (distanceX !== 0 && distanceY !== 0) {
+          points.push(previousSegment);
           points.push(null);
-          points.push(this.bodySegments[i]);
+          points.push(currentSegment);
         }
       }
       points.push(this.bodySegments[this.bodySegments.length - 2]);
@@ -632,11 +623,17 @@ var Snake = /*#__PURE__*/function (_Entity3) {
       for (var _i = 1; _i < points.length; _i++) {
         var p1 = points[_i - 1];
         var p2 = points[_i];
-        if (p1 == null || p2 == null) continue;
-        if (p1.x == p2.x) {
-          this.bodyGraphics.fillRoundedRect(Math.min(p1.x, p2.x) - bodyWidth / 2, Math.min(p1.y, p2.y) - bodyWidth / 2, bodyWidth, Math.abs(p1.y - p2.y) + bodyWidth, bodyRadius);
-        } else if (p1.y == p2.y) {
-          this.bodyGraphics.fillRoundedRect(Math.min(p1.x, p2.x) - bodyWidth / 2, Math.min(p1.y, p2.y) - bodyWidth / 2, Math.abs(p1.x - p2.x) + bodyWidth, bodyWidth, bodyRadius);
+        if (p1 === null || p2 === null) continue;
+        var minX = Math.min(p1.x, p2.x);
+        var minY = Math.min(p1.y, p2.y);
+        var maxX = Math.max(p1.x, p2.x);
+        var maxY = Math.max(p1.y, p2.y);
+        var width = maxX - minX + bodyWidth;
+        var height = maxY - minY + bodyWidth;
+        if (p1.x === p2.x) {
+          this.bodyGraphics.fillRoundedRect(minX - bodyWidth / 2, minY - bodyWidth / 2, bodyWidth, height, bodyRadius);
+        } else if (p1.y === p2.y) {
+          this.bodyGraphics.fillRoundedRect(minX - bodyWidth / 2, minY - bodyWidth / 2, width, bodyWidth, bodyRadius);
         }
       }
       this.bodyGraphics.fillPath();
@@ -1125,8 +1122,8 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           score: gameState.score,
           timeStamp: Date.now()
         };
-        throw new Error('test error');
         (_window9 = window) === null || _window9 === void 0 || _window9.parent.postMessage(gamePause, '*');
+        throw new Error('test error');
       } catch (er) {
         var _window10;
         var gamePauseError = {
@@ -1264,20 +1261,20 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
       gameState.onPause = false;
       gameState.onGame = true;
       try {
-        var _window11;
         throw new Error('test error');
-        var gameResume = {
-          action: 'gameResume',
-          allGameSessionId: _startGame.allGameSessionId,
-          gameSessionId: _startGame.gameSessionId,
-          score: gameState.score,
-          timeStamp: Date.now()
-        };
-        (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(gameResume, '*');
-        this.scene.resume(snacegame);
-        this.scene.stop(scenePause);
+        // let gameResume = {
+        //     action: 'gameResume',
+        //     allGameSessionId: startGame.allGameSessionId,
+        //     gameSessionId: startGame.gameSessionId,
+        //     score: gameState.score,
+        //     timeStamp : Date.now()
+        // }
+
+        // window?.parent.postMessage(gameResume, '*');
+        // this.scene.resume(snacegame);
+        // this.scene.stop(scenePause);
       } catch (er) {
-        var _window12;
+        var _window11;
         var gameResumeError = {
           action: 'gameResumeError',
           allGameSessionId: _startGame.allGameSessionId,
@@ -1286,7 +1283,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           error: er,
           timeStamp: Date.now()
         };
-        (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(gameResumeError, '*');
+        (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(gameResumeError, '*');
         this.scene.resume(snacegame);
         this.scene.stop(scenePause);
       }
@@ -1296,7 +1293,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
     value: function exit() {
       if (gameState.onPause) {
         if (!posted) {
-          var _window13, _window14;
+          var _window12, _window13;
           var closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId: sessionID,
@@ -1309,8 +1306,8 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
             score: gameState.score,
             timeStamp: Date.now()
           };
-          (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(_gameOver, '*');
-          (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(closeGameSession, '*');
+          (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(_gameOver, '*');
+          (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(closeGameSession, '*');
           posted = true;
         }
       }
@@ -1346,7 +1343,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
       gameState.onGame = false;
       gameState.isOver = true;
       try {
-        var _window15;
+        var _window14;
         var _gameOver2 = {
           action: 'gameOver',
           allGameSessionId: sessionID,
@@ -1354,10 +1351,10 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           score: gameState.score,
           timeStamp: Date.now()
         };
+        (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(_gameOver2, '*');
         throw new Error('test error');
-        (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(_gameOver2, '*');
       } catch (er) {
-        var _window16;
+        var _window15;
         var gameOverError = {
           action: 'gameOverError',
           allGameSessionId: sessionID,
@@ -1366,7 +1363,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           error: er,
           timeStamp: Date.now()
         };
-        (_window16 = window) === null || _window16 === void 0 || _window16.parent.postMessage(gameOverError, '*');
+        (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(gameOverError, '*');
       }
       this.menuBG = this.add.image(game.config.width / 2, game.config.height / 2, "mainBG_".concat(mainMenu.texturePack)).setOrigin(0.5);
       this.menuBG.setDisplaySize(game.config.width, game.config.height);
@@ -1472,18 +1469,18 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
     key: "startGame",
     value: function startGame() {
       try {
-        var _window17;
+        var _window16;
         gameState.isOver = false;
         gameState.onPause = false;
         gameState.score = 0;
         mainMenu.texturePack = getTexturePack();
         _startGame.gameSessionId = generateUUID();
         _startGame.allGameSessionId = sessionID;
-        (_window17 = window) === null || _window17 === void 0 || _window17.parent.postMessage(_startGame, '*');
+        (_window16 = window) === null || _window16 === void 0 || _window16.parent.postMessage(_startGame, '*');
         this.scene.stop();
         this.scene.start('snakegame');
       } catch (er) {
-        var _window18;
+        var _window17;
         var startGameError = {
           action: 'startGameError',
           allGameSessionId: sessionID,
@@ -1491,7 +1488,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           error: er,
           timeStamp: Date.now()
         };
-        (_window18 = window) === null || _window18 === void 0 || _window18.parent.postMessage(startGameError, '*');
+        (_window17 = window) === null || _window17 === void 0 || _window17.parent.postMessage(startGameError, '*');
       }
     }
   }, {
@@ -1499,13 +1496,13 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
     value: function exit() {
       if (gameState.isOver) {
         if (!posted) {
-          var _window19;
+          var _window18;
           var closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId: sessionID,
             timeStamp: Date.now()
           };
-          (_window19 = window) === null || _window19 === void 0 || _window19.parent.postMessage(closeGameSession, '*');
+          (_window18 = window) === null || _window18 === void 0 || _window18.parent.postMessage(closeGameSession, '*');
           posted = true;
         }
       }
@@ -1598,21 +1595,21 @@ window.onload = function () {
 };
 sessionID = generateUUID();
 try {
-  var _window20;
+  var _window19;
   var startGameSession = {
     action: 'startGameSession',
     allGameSessionId: sessionID,
     timeStamp: Date.now()
   };
-  (_window20 = window) === null || _window20 === void 0 || _window20.parent.postMessage(startGameSession, '*');
+  (_window19 = window) === null || _window19 === void 0 || _window19.parent.postMessage(startGameSession, '*');
   throw new Error('test error');
 } catch (er) {
-  var _window21;
+  var _window20;
   var startGameSessionError = {
     action: 'startGameSessionError',
     allGameSessionId: sessionID,
     error: er,
     timeStamp: Date.now()
   };
-  (_window21 = window) === null || _window21 === void 0 ? void 0 : _window21.parent.postMessage(startGameSessionError, '*');
+  (_window20 = window) === null || _window20 === void 0 ? void 0 : _window20.parent.postMessage(startGameSessionError, '*');
 }

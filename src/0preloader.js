@@ -108,9 +108,8 @@ class Preloader extends Phaser.Scene{
                 allGameSessionId: sessionID,
                 timeStamp: Date.now()
             }
-
-            throw new Error('test error');
             window?.parent.postMessage(finishDownload, '*');
+            throw new Error('test error');
         }
         catch(er){
             let downloadError = {

@@ -94,6 +94,7 @@ class Preloader extends Phaser.Scene{
             let startDownloadingError = {
                 action: 'startDownloadingError',
                 allGameSessionId: sessionID,
+                error: er.message,
                 timeStamp: Date.now()
             }
             window?.parent.postMessage(startDownloadingError, '*');
@@ -114,6 +115,7 @@ class Preloader extends Phaser.Scene{
             let downloadError = {
                 action: 'downloadError',
                 allGameSessionId: sessionID,
+                error: er.message,
                 timeStamp: Date.now()
             }
             window?.parent.postMessage(downloadError, '*');

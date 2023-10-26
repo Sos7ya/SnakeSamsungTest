@@ -7,7 +7,7 @@ var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
 var CELL = 32;
-var game_version = 'v 0.4.5s';
+var game_version = 'v 0.4.6s';
 var posted = false;
 var sessionID;
 var gameId = generateUUID();
@@ -65,6 +65,7 @@ sessionID = generateUUID()
         var startGameSessionError = {
           action: 'startGameSessionError',
           allGameSessionId: sessionID,
+          error: er.message,
           timeStamp: Date.now()
         }
         window?.parent.postMessage(startGameSessionError, '*');

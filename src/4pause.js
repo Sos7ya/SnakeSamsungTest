@@ -23,6 +23,7 @@ class ScenePause extends Phaser.Scene{
                 allGameSessionId: startGame.allGameSessionId,
                 gameSessionId: startGame.gameSessionId,
                 score: gameState.score,
+                error: er.message,
                 timeStamp : Date.now()
             }
     
@@ -136,17 +137,17 @@ class ScenePause extends Phaser.Scene{
         
         try{
             throw new Error('test error');
-            // let gameResume = {
-            //     action: 'gameResume',
-            //     allGameSessionId: startGame.allGameSessionId,
-            //     gameSessionId: startGame.gameSessionId,
-            //     score: gameState.score,
-            //     timeStamp : Date.now()
-            // }
+            let gameResume = {
+                action: 'gameResume',
+                allGameSessionId: startGame.allGameSessionId,
+                gameSessionId: startGame.gameSessionId,
+                score: gameState.score,
+                timeStamp : Date.now()
+            }
 
-            // window?.parent.postMessage(gameResume, '*');
-            // this.scene.resume(snacegame);
-            // this.scene.stop(scenePause);
+            window?.parent.postMessage(gameResume, '*');
+            this.scene.resume(snacegame);
+            this.scene.stop(scenePause);
         }
         catch(er){
             let gameResumeError = {
@@ -154,6 +155,7 @@ class ScenePause extends Phaser.Scene{
                 allGameSessionId: startGame.allGameSessionId,
                 gameSessionId: startGame.gameSessionId,
                 score: gameState.score,
+                error: er.message,
                 timeStamp : Date.now()
             }
 

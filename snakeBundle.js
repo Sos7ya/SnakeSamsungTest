@@ -156,7 +156,6 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
         var downloadError = {
           action: 'downloadError',
           allGameSessionId: sessionID,
-          error: er,
           timeStamp: Date.now()
         };
         (_window4 = window) === null || _window4 === void 0 || _window4.parent.postMessage(downloadError, '*');
@@ -430,7 +429,6 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
             action: 'startGameError',
             allGameSessionId: sessionID,
             gameSessionId: gameId,
-            error: er,
             timeStamp: Date.now()
           };
           (_window6 = window) === null || _window6 === void 0 || _window6.parent.postMessage(startGameError, '*');
@@ -874,7 +872,6 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
           allGameSessionId: sessionID,
           gameSessionId: _startGame.gameSessionId,
           score: gameState.score,
-          error: er,
           timeStamp: Date.now()
         };
         (_window8 = window) === null || _window8 === void 0 || _window8.parent.postMessage(undefinedError, '*');
@@ -1130,7 +1127,6 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           allGameSessionId: _startGame.allGameSessionId,
           gameSessionId: _startGame.gameSessionId,
           score: gameState.score,
-          error: er,
           timeStamp: Date.now()
         };
         (_window10 = window) === null || _window10 === void 0 || _window10.parent.postMessage(gamePauseError, '*');
@@ -1279,7 +1275,6 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           allGameSessionId: _startGame.allGameSessionId,
           gameSessionId: _startGame.gameSessionId,
           score: gameState.score,
-          error: er,
           timeStamp: Date.now()
         };
         (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(gameResumeError, '*');
@@ -1359,7 +1354,6 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           allGameSessionId: sessionID,
           gameSessionId: _startGame.gameSessionId,
           score: gameState.score,
-          error: er,
           timeStamp: Date.now()
         };
         (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(gameOverError, '*');
@@ -1484,7 +1478,6 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           action: 'startGameError',
           allGameSessionId: sessionID,
           gameSessionId: gameId,
-          error: er,
           timeStamp: Date.now()
         };
         (_window17 = window) === null || _window17 === void 0 || _window17.parent.postMessage(startGameError, '*');
@@ -1607,7 +1600,6 @@ try {
   var startGameSessionError = {
     action: 'startGameSessionError',
     allGameSessionId: sessionID,
-    error: er,
     timeStamp: Date.now()
   };
   (_window20 = window) === null || _window20 === void 0 ? void 0 : _window20.parent.postMessage(startGameSessionError, '*');

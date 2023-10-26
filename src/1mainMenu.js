@@ -129,7 +129,6 @@ class MainMenu extends Phaser.Scene{
                     action: 'startGameError',
                     allGameSessionId : sessionID,
                     gameSessionId: gameId,
-                    error: er,
                     timeStamp: Date.now()
                 }
                 window?.parent.postMessage(startGameError, '*');

@@ -65,7 +65,6 @@ sessionID = generateUUID()
         var startGameSessionError = {
           action: 'startGameSessionError',
           allGameSessionId: sessionID,
-          error: er,
           timeStamp: Date.now()
         }
         window?.parent.postMessage(startGameSessionError, '*');

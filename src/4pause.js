@@ -23,7 +23,6 @@ class ScenePause extends Phaser.Scene{
                 allGameSessionId: startGame.allGameSessionId,
                 gameSessionId: startGame.gameSessionId,
                 score: gameState.score,
-                error: er,
                 timeStamp : Date.now()
             }
     
@@ -155,7 +154,6 @@ class ScenePause extends Phaser.Scene{
                 allGameSessionId: startGame.allGameSessionId,
                 gameSessionId: startGame.gameSessionId,
                 score: gameState.score,
-                error: er,
                 timeStamp : Date.now()
             }
 

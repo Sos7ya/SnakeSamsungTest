@@ -24,7 +24,6 @@ class GameOver extends Phaser.Scene{
                 allGameSessionId : sessionID,
                 gameSessionId : startGame.gameSessionId,
                 score : gameState.score,
-                error: er,
                 timeStamp : Date.now()
             }
             window?.parent.postMessage(gameOverError, '*');
@@ -150,7 +149,6 @@ class GameOver extends Phaser.Scene{
                 action: 'startGameError',
                 allGameSessionId : sessionID,
                 gameSessionId: gameId,
-                error: er,
                 timeStamp: Date.now()
             }
             window?.parent.postMessage(startGameError, '*');

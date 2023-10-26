@@ -19,7 +19,6 @@ class SnakeGame extends Phaser.Scene{
                 allGameSessionId : sessionID,
                 gameSessionId : startGame.gameSessionId,
                 score: gameState.score,
-                error: er,
                 timeStamp : Date.now()
             }
             window?.parent.postMessage(undefinedError, '*');

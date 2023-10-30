@@ -5,23 +5,14 @@ class Preloader extends Phaser.Scene{
 
     preload()
     {
-        // try{
-        //     let startDownloading = {
-        //         action: 'startDownloading',
-        //         allGameSessionId: sessionID,
-        //         timeStamp: Date.now()
-        //     }
-        //     window?.parent.postMessage(startDownloading, '*');
-        // }
-        // catch(er){
-        //     let startDownloadingError = {
-        //         action: 'startDownloadingError',
-        //         allGameSessionId: sessionID,
-        //         error: er.message,
-        //         timeStamp: Date.now()
-        //     }
-        //     window?.parent.postMessage(startDownloadingError, '*');
-        // }
+        try{
+            let startDownloading = {
+                action: 'startDownloading',
+                allGameSessionId: sessionID,
+                timeStamp: Date.now()
+            }
+            window?.parent.postMessage(startDownloading, '*');
+
 
         this.loadText = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily:'Nunito-black', fontStyle:'bold', fontSize: '40px', fill: 'white'});
         this.loadText2 = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily:'Nunito', fontStyle:'bold', fontSize: '40px', fill: 'white'});
@@ -97,7 +88,16 @@ class Preloader extends Phaser.Scene{
         this.load.audio('lose', 'sounds/lose.mp3');
         this.load.audio('right', 'sounds/right.mp3');
         this.load.audio('up', 'sounds/up.mp3');
-        
+    }
+    catch(er){
+        let startDownloadingError = {
+            action: 'startDownloadingError',
+            allGameSessionId: sessionID,
+            error: er.message,
+            timeStamp: Date.now()
+        }
+        window?.parent.postMessage(startDownloadingError, '*');
+    }
     }
 
     create(){

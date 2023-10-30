@@ -28,125 +28,125 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
   _createClass(Preloader, [{
     key: "preload",
     value: function preload() {
-      // try{
-      //     let startDownloading = {
-      //         action: 'startDownloading',
-      //         allGameSessionId: sessionID,
-      //         timeStamp: Date.now()
-      //     }
-      //     window?.parent.postMessage(startDownloading, '*');
-      // }
-      // catch(er){
-      //     let startDownloadingError = {
-      //         action: 'startDownloadingError',
-      //         allGameSessionId: sessionID,
-      //         error: er.message,
-      //         timeStamp: Date.now()
-      //     }
-      //     window?.parent.postMessage(startDownloadingError, '*');
-      // }
-
-      this.loadText = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
-        fontFamily: 'Nunito-black',
-        fontStyle: 'bold',
-        fontSize: '40px',
-        fill: 'white'
-      });
-      this.loadText2 = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
-        fontFamily: 'Nunito',
-        fontStyle: 'bold',
-        fontSize: '40px',
-        fill: 'white'
-      });
-      this.loadText3 = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
-        fontFamily: 'RubikOne-Regular',
-        fontStyle: 'bold',
-        fontSize: '40px',
-        fill: 'white'
-      });
-      this.loadText4 = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
-        fontFamily: 'Rubik-Medium',
-        fontStyle: 'bold',
-        fontSize: '40px',
-        fill: 'white'
-      });
-      this.loadText5 = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
-        fontFamily: 'Rubik-Regular',
-        fontStyle: 'bold',
-        fontSize: '40px',
-        fill: 'white'
-      });
-      this.loadText2.alpha = 0;
-      this.loadText3.alpha = 0;
-      this.loadText4.alpha = 0;
-      this.loadText5.alpha = 0;
-      this.loadText.setOrigin(0.5);
-      this.load.setPath('assets/');
-      this.load.image('line', 'line.png');
-      this.load.image('info', 'gameInfo.png');
-      this.load.image('controlsInfo', 'controlsInfo.png');
-      this.load.image('ageInfo', 'ageInfo.png');
-      this.load.image('background_0', 'skins/bg_0.png');
-      this.load.image('background_1', 'skins/bg_1.png');
-      this.load.image('background_2', 'skins/bg_2.png');
-      this.load.image('head_0', 'skins/head_0.png');
-      this.load.image('head_1', 'skins/head_1.png');
-      this.load.image('head_2', 'skins/head_2.png');
-      this.load.image('head_lick_0', '/skins/head_lick_0.png');
-      this.load.image('head_lick_1', '/skins/head_lick_1.png');
-      this.load.image('head_lick_2', '/skins/head_lick_2.png');
-      this.load.image('body_0', 'skins/body_0.png');
-      this.load.image('body_1', 'skins/body_1.png');
-      this.load.image('body_2', 'skins/body_2.png');
-      this.load.image('tail_0', 'skins/tail_0.png');
-      this.load.image('tail_1', 'skins/tail_1.png');
-      this.load.image('tail_2', 'skins/tail_2.png');
-      this.load.image('scoreIcon', 'ui/scoreIcon.png');
-      this.load.image('bestIcon', 'ui/bestIcon.png');
-      this.load.image('menuStart', 'ui/menuStart.png');
-      this.load.image('menuGameOver', 'ui/menuGameOver.png');
-      this.load.image('mainBG_0', 'ui/uibg_0.png');
-      this.load.image('mainBG_1', 'ui/uibg_1.png');
-      this.load.image('mainBG_2', 'ui/uibg_2.png');
-      this.load.image('pause', 'ui/pause.png');
-      this.load.image('button', 'button.png');
-      this.load.image('selector', 'selector.png');
-      this.load.image('food', 'food.png');
-      this.load.image('food_small', 'food_small.png');
-      this.load.image('food_big', 'food_big.png');
-      this.load.image('bonus_1', 'bonus_1.png');
-      this.load.image('bonus_0', 'bonus_0.png');
-      this.load.image('bonus_small_0', 'bonus_small_0.png');
-      this.load.image('bonus_small_1', 'bonus_small_1.png');
-      this.load.image('bonus_big_0', 'bonus_big_0.png');
-      this.load.image('bonus_big_1', 'bonus_big_1.png');
-      this.load.image('head_helmet_0', '/skins/head_helmet_0.png');
-      this.load.image('head_helmet_1', '/skins/head_helmet_1.png');
-      this.load.image('head_helmet_2', '/skins/head_helmet_2.png');
-      this.load.image('head_helmet_nolick_0', '/skins/head_helmet_nolick_0.png');
-      this.load.image('head_helmet_nolick_1', '/skins/head_helmet_nolick_1.png');
-      this.load.image('head_helmet_nolick_2', '/skins/head_helmet_nolick_2.png');
-      this.load.audio('background-music', 'sounds/background_music.mp3');
-      this.load.audio('bite', 'sounds/bite.mp3');
-      this.load.audio('bonus', 'sounds/bonus.mp3');
-      this.load.audio('click', 'sounds/click.mp3');
-      this.load.audio('down', 'sounds/down.mp3');
-      this.load.audio('left', 'sounds/left.mp3');
-      this.load.audio('lose', 'sounds/lose.mp3');
-      this.load.audio('right', 'sounds/right.mp3');
-      this.load.audio('up', 'sounds/up.mp3');
+      try {
+        var _window;
+        var startDownloading = {
+          action: 'startDownloading',
+          allGameSessionId: sessionID,
+          timeStamp: Date.now()
+        };
+        (_window = window) === null || _window === void 0 || _window.parent.postMessage(startDownloading, '*');
+        this.loadText = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
+          fontFamily: 'Nunito-black',
+          fontStyle: 'bold',
+          fontSize: '40px',
+          fill: 'white'
+        });
+        this.loadText2 = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
+          fontFamily: 'Nunito',
+          fontStyle: 'bold',
+          fontSize: '40px',
+          fill: 'white'
+        });
+        this.loadText3 = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
+          fontFamily: 'RubikOne-Regular',
+          fontStyle: 'bold',
+          fontSize: '40px',
+          fill: 'white'
+        });
+        this.loadText4 = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
+          fontFamily: 'Rubik-Medium',
+          fontStyle: 'bold',
+          fontSize: '40px',
+          fill: 'white'
+        });
+        this.loadText5 = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
+          fontFamily: 'Rubik-Regular',
+          fontStyle: 'bold',
+          fontSize: '40px',
+          fill: 'white'
+        });
+        this.loadText2.alpha = 0;
+        this.loadText3.alpha = 0;
+        this.loadText4.alpha = 0;
+        this.loadText5.alpha = 0;
+        this.loadText.setOrigin(0.5);
+        this.load.setPath('assets/');
+        this.load.image('line', 'line.png');
+        this.load.image('info', 'gameInfo.png');
+        this.load.image('controlsInfo', 'controlsInfo.png');
+        this.load.image('ageInfo', 'ageInfo.png');
+        this.load.image('background_0', 'skins/bg_0.png');
+        this.load.image('background_1', 'skins/bg_1.png');
+        this.load.image('background_2', 'skins/bg_2.png');
+        this.load.image('head_0', 'skins/head_0.png');
+        this.load.image('head_1', 'skins/head_1.png');
+        this.load.image('head_2', 'skins/head_2.png');
+        this.load.image('head_lick_0', '/skins/head_lick_0.png');
+        this.load.image('head_lick_1', '/skins/head_lick_1.png');
+        this.load.image('head_lick_2', '/skins/head_lick_2.png');
+        this.load.image('body_0', 'skins/body_0.png');
+        this.load.image('body_1', 'skins/body_1.png');
+        this.load.image('body_2', 'skins/body_2.png');
+        this.load.image('tail_0', 'skins/tail_0.png');
+        this.load.image('tail_1', 'skins/tail_1.png');
+        this.load.image('tail_2', 'skins/tail_2.png');
+        this.load.image('scoreIcon', 'ui/scoreIcon.png');
+        this.load.image('bestIcon', 'ui/bestIcon.png');
+        this.load.image('menuStart', 'ui/menuStart.png');
+        this.load.image('menuGameOver', 'ui/menuGameOver.png');
+        this.load.image('mainBG_0', 'ui/uibg_0.png');
+        this.load.image('mainBG_1', 'ui/uibg_1.png');
+        this.load.image('mainBG_2', 'ui/uibg_2.png');
+        this.load.image('pause', 'ui/pause.png');
+        this.load.image('button', 'button.png');
+        this.load.image('selector', 'selector.png');
+        this.load.image('food', 'food.png');
+        this.load.image('food_small', 'food_small.png');
+        this.load.image('food_big', 'food_big.png');
+        this.load.image('bonus_1', 'bonus_1.png');
+        this.load.image('bonus_0', 'bonus_0.png');
+        this.load.image('bonus_small_0', 'bonus_small_0.png');
+        this.load.image('bonus_small_1', 'bonus_small_1.png');
+        this.load.image('bonus_big_0', 'bonus_big_0.png');
+        this.load.image('bonus_big_1', 'bonus_big_1.png');
+        this.load.image('head_helmet_0', '/skins/head_helmet_0.png');
+        this.load.image('head_helmet_1', '/skins/head_helmet_1.png');
+        this.load.image('head_helmet_2', '/skins/head_helmet_2.png');
+        this.load.image('head_helmet_nolick_0', '/skins/head_helmet_nolick_0.png');
+        this.load.image('head_helmet_nolick_1', '/skins/head_helmet_nolick_1.png');
+        this.load.image('head_helmet_nolick_2', '/skins/head_helmet_nolick_2.png');
+        this.load.audio('background-music', 'sounds/background_music.mp3');
+        this.load.audio('bite', 'sounds/bite.mp3');
+        this.load.audio('bonus', 'sounds/bonus.mp3');
+        this.load.audio('click', 'sounds/click.mp3');
+        this.load.audio('down', 'sounds/down.mp3');
+        this.load.audio('left', 'sounds/left.mp3');
+        this.load.audio('lose', 'sounds/lose.mp3');
+        this.load.audio('right', 'sounds/right.mp3');
+        this.load.audio('up', 'sounds/up.mp3');
+      } catch (er) {
+        var _window2;
+        var startDownloadingError = {
+          action: 'startDownloadingError',
+          allGameSessionId: sessionID,
+          error: er.message,
+          timeStamp: Date.now()
+        };
+        (_window2 = window) === null || _window2 === void 0 || _window2.parent.postMessage(startDownloadingError, '*');
+      }
     }
   }, {
     key: "create",
     value: function create() {
       try {
-        var _window;
+        var _window3;
         var finishDownload = {
           action: 'finishDownload',
           allGameSessionId: sessionID,
           timeStamp: Date.now()
         };
-        (_window = window) === null || _window === void 0 || _window.parent.postMessage(finishDownload, '*');
+        (_window3 = window) === null || _window3 === void 0 || _window3.parent.postMessage(finishDownload, '*');
         this.anims.create({
           key: 'food-animation',
           frames: [{
@@ -263,14 +263,14 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
           repeat: -1
         });
       } catch (er) {
-        var _window2;
+        var _window4;
         var downloadError = {
           action: 'downloadError',
           allGameSessionId: sessionID,
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window2 = window) === null || _window2 === void 0 || _window2.parent.postMessage(downloadError, '*');
+        (_window4 = window) === null || _window4 === void 0 || _window4.parent.postMessage(downloadError, '*');
       }
       this.scene.start(mainMenu);
     }
@@ -414,13 +414,13 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
       if (gameState.onMenu) {
         gameState.onMenu = false;
         try {
-          var _window3;
+          var _window5;
           _startGame.gameSessionId = generateUUID();
           _startGame.allGameSessionId = sessionID;
-          (_window3 = window) === null || _window3 === void 0 || _window3.parent.postMessage(_startGame, '*');
+          (_window5 = window) === null || _window5 === void 0 || _window5.parent.postMessage(_startGame, '*');
           this.scene.start('snakegame');
         } catch (er) {
-          var _window4;
+          var _window6;
           var startGameError = {
             action: 'startGameError',
             allGameSessionId: sessionID,
@@ -428,7 +428,7 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
             error: er.message,
             timeStamp: Date.now()
           };
-          (_window4 = window) === null || _window4 === void 0 || _window4.parent.postMessage(startGameError, '*');
+          (_window6 = window) === null || _window6 === void 0 || _window6.parent.postMessage(startGameError, '*');
         }
       }
     }
@@ -437,13 +437,13 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
     value: function exit() {
       if (gameState.onMenu) {
         if (!posted) {
-          var _window5;
+          var _window7;
           var closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId: sessionID,
             timeStamp: Date.now()
           };
-          (_window5 = window) === null || _window5 === void 0 || _window5.parent.postMessage(closeGameSession, '*');
+          (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(closeGameSession, '*');
           posted = true;
         }
       }
@@ -911,7 +911,7 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
         }).setOrigin(0.5);
         this.getField();
       } catch (er) {
-        var _window6;
+        var _window8;
         var undefinedError = {
           action: 'undefinedError',
           allGameSessionId: sessionID,
@@ -920,7 +920,7 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window6 = window) === null || _window6 === void 0 || _window6.parent.postMessage(undefinedError, '*');
+        (_window8 = window) === null || _window8 === void 0 || _window8.parent.postMessage(undefinedError, '*');
       }
     }
 
@@ -1097,7 +1097,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
       gameState.onPause = true;
       gameState.onGame = false;
       try {
-        var _window7;
+        var _window9;
         var gamePause = {
           action: 'gamePause',
           allGameSessionId: _startGame.allGameSessionId,
@@ -1105,7 +1105,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           score: gameState.score,
           timeStamp: Date.now()
         };
-        (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(gamePause, '*');
+        (_window9 = window) === null || _window9 === void 0 || _window9.parent.postMessage(gamePause, '*');
         this.bgpauseImage = this.add.image(game.config.width / 2, game.config.height / 2, "mainBG_".concat(mainMenu.texturePack)).setOrigin(0.5);
         this.bgpauseImage.setDisplaySize(game.config.width, game.config.height);
         this.pauseScreen = this.add.image(game.config.width / 2, game.config.height / 2, 'pause').setOrigin(0.5).setDisplaySize(game.config.width, game.config.height);
@@ -1163,7 +1163,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           fill: '#fff'
         }).setOrigin(0.5);
       } catch (er) {
-        var _window8;
+        var _window10;
         var gamePauseError = {
           action: 'gamePauseError',
           allGameSessionId: _startGame.allGameSessionId,
@@ -1172,7 +1172,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window8 = window) === null || _window8 === void 0 || _window8.parent.postMessage(gamePauseError, '*');
+        (_window10 = window) === null || _window10 === void 0 || _window10.parent.postMessage(gamePauseError, '*');
       }
     }
   }, {
@@ -1243,7 +1243,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
       gameState.onPause = false;
       gameState.onGame = true;
       try {
-        var _window9;
+        var _window11;
         var gameResume = {
           action: 'gameResume',
           allGameSessionId: _startGame.allGameSessionId,
@@ -1251,11 +1251,11 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           score: gameState.score,
           timeStamp: Date.now()
         };
-        (_window9 = window) === null || _window9 === void 0 || _window9.parent.postMessage(gameResume, '*');
+        (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(gameResume, '*');
         this.scene.resume(snacegame);
         this.scene.stop(scenePause);
       } catch (er) {
-        var _window10;
+        var _window12;
         var gameResumeError = {
           action: 'gameResumeError',
           allGameSessionId: _startGame.allGameSessionId,
@@ -1264,7 +1264,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window10 = window) === null || _window10 === void 0 || _window10.parent.postMessage(gameResumeError, '*');
+        (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(gameResumeError, '*');
         this.scene.resume(snacegame);
         this.scene.stop(scenePause);
       }
@@ -1274,7 +1274,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
     value: function exit() {
       if (gameState.onPause) {
         if (!posted) {
-          var _window11, _window12;
+          var _window13, _window14;
           var closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId: sessionID,
@@ -1287,8 +1287,8 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
             score: gameState.score,
             timeStamp: Date.now()
           };
-          (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(_gameOver, '*');
-          (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(closeGameSession, '*');
+          (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(_gameOver, '*');
+          (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(closeGameSession, '*');
           posted = true;
         }
       }
@@ -1324,7 +1324,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
       gameState.onGame = false;
       gameState.isOver = true;
       try {
-        var _window13;
+        var _window15;
         var _gameOver2 = {
           action: 'gameOver',
           allGameSessionId: sessionID,
@@ -1332,7 +1332,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           score: gameState.score,
           timeStamp: Date.now()
         };
-        (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(_gameOver2, '*');
+        (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(_gameOver2, '*');
         this.menuBG = this.add.image(game.config.width / 2, game.config.height / 2, "mainBG_".concat(mainMenu.texturePack)).setOrigin(0.5);
         this.menuBG.setDisplaySize(game.config.width, game.config.height);
         this.controlsInfo = this.add.image(310, 70, 'controlsInfo').setOrigin(0.5);
@@ -1396,7 +1396,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           fill: '#fff'
         }).setOrigin(0.5);
       } catch (er) {
-        var _window14;
+        var _window16;
         var gameOverError = {
           action: 'gameOverError',
           allGameSessionId: sessionID,
@@ -1405,7 +1405,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(gameOverError, '*');
+        (_window16 = window) === null || _window16 === void 0 || _window16.parent.postMessage(gameOverError, '*');
       }
     }
   }, {
@@ -1449,18 +1449,18 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
     key: "startGame",
     value: function startGame() {
       try {
-        var _window15;
+        var _window17;
         gameState.isOver = false;
         gameState.onPause = false;
         gameState.score = 0;
         mainMenu.texturePack = getTexturePack();
         _startGame.gameSessionId = generateUUID();
         _startGame.allGameSessionId = sessionID;
-        (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(_startGame, '*');
+        (_window17 = window) === null || _window17 === void 0 || _window17.parent.postMessage(_startGame, '*');
         this.scene.stop();
         this.scene.start('snakegame');
       } catch (er) {
-        var _window16;
+        var _window18;
         var startGameError = {
           action: 'startGameError',
           allGameSessionId: sessionID,
@@ -1468,7 +1468,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window16 = window) === null || _window16 === void 0 || _window16.parent.postMessage(startGameError, '*');
+        (_window18 = window) === null || _window18 === void 0 || _window18.parent.postMessage(startGameError, '*');
       }
     }
   }, {
@@ -1476,13 +1476,13 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
     value: function exit() {
       if (gameState.isOver) {
         if (!posted) {
-          var _window17;
+          var _window19;
           var closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId: sessionID,
             timeStamp: Date.now()
           };
-          (_window17 = window) === null || _window17 === void 0 || _window17.parent.postMessage(closeGameSession, '*');
+          (_window19 = window) === null || _window19 === void 0 || _window19.parent.postMessage(closeGameSession, '*');
           posted = true;
         }
       }
@@ -1559,6 +1559,7 @@ try {
     timeStamp: Date.now()
   };
   window.onload = function () {
+    var _window20;
     var config = {
       type: Phaser.CANVAS,
       width: 1920,
@@ -1579,15 +1580,15 @@ try {
     var canvas = document.getElementsByTagName('canvas');
     canvas.outline = 0;
     game = new Phaser.Game(config);
-    //window?.parent.postMessage(startGameSession, '*');
+    (_window20 = window) === null || _window20 === void 0 || _window20.parent.postMessage(startGameSession, '*');
   };
 } catch (er) {
-  var _window18;
+  var _window21;
   var startGameSessionError = {
     action: 'startGameSessionError',
     allGameSessionId: sessionID,
     error: er.message,
     timeStamp: Date.now()
   };
-  (_window18 = window) === null || _window18 === void 0 ? void 0 : _window18.parent.postMessage(startGameSessionError, '*');
+  (_window21 = window) === null || _window21 === void 0 ? void 0 : _window21.parent.postMessage(startGameSessionError, '*');
 }

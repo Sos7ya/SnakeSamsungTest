@@ -20,35 +20,32 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
   _inherits(Preloader, _Phaser$Scene);
   var _super = _createSuper(Preloader);
   function Preloader() {
-    var _this;
     _classCallCheck(this, Preloader);
-    _this = _super.call(this, {
+    return _super.call(this, {
       key: 'preloader'
     });
-    _this.loadText;
-    return _this;
   }
   _createClass(Preloader, [{
     key: "preload",
     value: function preload() {
-      try {
-        var _window;
-        var startDownloading = {
-          action: 'startDownloading',
-          allGameSessionId: sessionID,
-          timeStamp: Date.now()
-        };
-        (_window = window) === null || _window === void 0 || _window.parent.postMessage(startDownloading, '*');
-      } catch (er) {
-        var _window2;
-        var startDownloadingError = {
-          action: 'startDownloadingError',
-          allGameSessionId: sessionID,
-          error: er.message,
-          timeStamp: Date.now()
-        };
-        (_window2 = window) === null || _window2 === void 0 || _window2.parent.postMessage(startDownloadingError, '*');
-      }
+      // try{
+      //     let startDownloading = {
+      //         action: 'startDownloading',
+      //         allGameSessionId: sessionID,
+      //         timeStamp: Date.now()
+      //     }
+      //     window?.parent.postMessage(startDownloading, '*');
+      // }
+      // catch(er){
+      //     let startDownloadingError = {
+      //         action: 'startDownloadingError',
+      //         allGameSessionId: sessionID,
+      //         error: er.message,
+      //         timeStamp: Date.now()
+      //     }
+      //     window?.parent.postMessage(startDownloadingError, '*');
+      // }
+
       this.loadText = this.add.text(game.config.width / 2, game.config.height / 2, 'ЗАГРУЗКА...', {
         fontFamily: 'Nunito-black',
         fontStyle: 'bold',
@@ -143,13 +140,13 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
     key: "create",
     value: function create() {
       try {
-        var _window3;
+        var _window;
         var finishDownload = {
           action: 'finishDownload',
           allGameSessionId: sessionID,
           timeStamp: Date.now()
         };
-        (_window3 = window) === null || _window3 === void 0 || _window3.parent.postMessage(finishDownload, '*');
+        (_window = window) === null || _window === void 0 || _window.parent.postMessage(finishDownload, '*');
         this.anims.create({
           key: 'food-animation',
           frames: [{
@@ -266,14 +263,14 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
           repeat: -1
         });
       } catch (er) {
-        var _window4;
+        var _window2;
         var downloadError = {
           action: 'downloadError',
           allGameSessionId: sessionID,
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window4 = window) === null || _window4 === void 0 || _window4.parent.postMessage(downloadError, '*');
+        (_window2 = window) === null || _window2 === void 0 || _window2.parent.postMessage(downloadError, '*');
       }
       this.scene.start(mainMenu);
     }
@@ -299,7 +296,7 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
   _createClass(MainMenu, [{
     key: "create",
     value: function create() {
-      var _this2 = this;
+      var _this = this;
       this.texturePack = getTexturePack();
       gameState.onMenu = true;
       gameState.onGame = false;
@@ -343,7 +340,7 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
 
       document.addEventListener('keydown', function (e) {
         if (e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) {
-          _this2.onPressExit();
+          _this.onPressExit();
         }
       });
       this.clickSound = this.sound.add('click', {
@@ -417,13 +414,13 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
       if (gameState.onMenu) {
         gameState.onMenu = false;
         try {
-          var _window5;
+          var _window3;
           _startGame.gameSessionId = generateUUID();
           _startGame.allGameSessionId = sessionID;
-          (_window5 = window) === null || _window5 === void 0 || _window5.parent.postMessage(_startGame, '*');
+          (_window3 = window) === null || _window3 === void 0 || _window3.parent.postMessage(_startGame, '*');
           this.scene.start('snakegame');
         } catch (er) {
-          var _window6;
+          var _window4;
           var startGameError = {
             action: 'startGameError',
             allGameSessionId: sessionID,
@@ -431,7 +428,7 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
             error: er.message,
             timeStamp: Date.now()
           };
-          (_window6 = window) === null || _window6 === void 0 || _window6.parent.postMessage(startGameError, '*');
+          (_window4 = window) === null || _window4 === void 0 || _window4.parent.postMessage(startGameError, '*');
         }
       }
     }
@@ -440,13 +437,13 @@ var MainMenu = /*#__PURE__*/function (_Phaser$Scene2) {
     value: function exit() {
       if (gameState.onMenu) {
         if (!posted) {
-          var _window7;
+          var _window5;
           var closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId: sessionID,
             timeStamp: Date.now()
           };
-          (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(closeGameSession, '*');
+          (_window5 = window) === null || _window5 === void 0 || _window5.parent.postMessage(closeGameSession, '*');
           posted = true;
         }
       }
@@ -469,14 +466,14 @@ var Entity = /*#__PURE__*/function (_Phaser$GameObjects$I) {
   _inherits(Entity, _Phaser$GameObjects$I);
   var _super3 = _createSuper(Entity);
   function Entity(scene, x, y, type) {
-    var _this3;
+    var _this2;
     _classCallCheck(this, Entity);
-    _this3 = _super3.call(this, scene, x, y);
-    _this3.scene = scene;
-    _this3.scene.add.existing(_assertThisInitialized(_this3));
-    _this3.setData('type', type);
-    _this3.setData('isDead', false);
-    return _this3;
+    _this2 = _super3.call(this, scene, x, y);
+    _this2.scene = scene;
+    _this2.scene.add.existing(_assertThisInitialized(_this2));
+    _this2.setData('type', type);
+    _this2.setData('isDead', false);
+    return _this2;
   }
   return _createClass(Entity);
 }(Phaser.GameObjects.Image);
@@ -484,15 +481,15 @@ var Food = /*#__PURE__*/function (_Entity) {
   _inherits(Food, _Entity);
   var _super4 = _createSuper(Food);
   function Food(scene, x, y) {
-    var _this4;
+    var _this3;
     _classCallCheck(this, Food);
-    _this4 = _super4.call(this, scene, x, y);
-    _this4.body = _this4.scene.physics.add.sprite(x * CELL, y * CELL, 'food').play('food-animation');
-    _this4.body.setDisplaySize(32, 32);
-    _this4.body.setSize(30, 30, true);
-    _this4.body.setOrigin(0.5);
-    _this4.total = 0;
-    return _this4;
+    _this3 = _super4.call(this, scene, x, y);
+    _this3.body = _this3.scene.physics.add.sprite(x * CELL, y * CELL, 'food').play('food-animation');
+    _this3.body.setDisplaySize(32, 32);
+    _this3.body.setSize(30, 30, true);
+    _this3.body.setOrigin(0.5);
+    _this3.total = 0;
+    return _this3;
   }
   _createClass(Food, [{
     key: "eat",
@@ -506,19 +503,19 @@ var Bonus = /*#__PURE__*/function (_Entity2) {
   _inherits(Bonus, _Entity2);
   var _super5 = _createSuper(Bonus);
   function Bonus(scene, x, y, texture, i) {
-    var _this5;
+    var _this4;
     _classCallCheck(this, Bonus);
-    _this5 = _super5.call(this, scene, x, y);
-    _this5.onPlate = false;
-    _this5.body = _this5.scene.physics.add.sprite(x * CELL, y * CELL, texture).play("bonus-animation_".concat(i));
-    _this5.body.setDisplaySize(32, 32);
-    _this5.body.setOrigin(0.5);
-    _this5.index = i;
-    _this5.bonusSound = _this5.scene.sound.add('bonus', {
+    _this4 = _super5.call(this, scene, x, y);
+    _this4.onPlate = false;
+    _this4.body = _this4.scene.physics.add.sprite(x * CELL, y * CELL, texture).play("bonus-animation_".concat(i));
+    _this4.body.setDisplaySize(32, 32);
+    _this4.body.setOrigin(0.5);
+    _this4.index = i;
+    _this4.bonusSound = _this4.scene.sound.add('bonus', {
       loop: false,
       volume: 0.5
     });
-    return _this5;
+    return _this4;
   }
   return _createClass(Bonus);
 }(Entity);
@@ -526,58 +523,58 @@ var Snake = /*#__PURE__*/function (_Entity3) {
   _inherits(Snake, _Entity3);
   var _super6 = _createSuper(Snake);
   function Snake(scene, x, y) {
-    var _this6;
+    var _this5;
     _classCallCheck(this, Snake);
-    _this6 = _super6.call(this, scene, x, y);
-    _this6.headPosition = new Phaser.Geom.Point(x, y);
-    _this6.body = scene.add.group();
-    _this6.head = _this6.scene.physics.add.sprite(x * CELL, y * CELL, "head_".concat(mainMenu.texturePack)).play("liking_".concat(mainMenu.texturePack));
-    _this6.body.add(_this6.head);
-    _this6.head.setOrigin(0.5);
-    _this6.head.setScale(0.4);
-    _this6.head.setDepth(4);
-    _this6.head.rotation = 4.7;
-    _this6.alive = true;
-    _this6.speed = 130;
-    _this6.moveTime = 0;
-    _this6.tail = _this6.scene.physics.add.sprite(_this6.head.x, _this6.head.y, "tail_".concat(mainMenu.texturePack));
-    _this6.body.add(_this6.tail);
-    _this6.tail.setOrigin(0.5);
-    _this6.tail.setDisplaySize(32, 32);
-    _this6.tail.setSize(32, 32, true);
-    _this6.bodyGraphics = _this6.scene.add.graphics();
-    _this6.end = new Phaser.Geom.Point(x, y);
-    _this6.heading = RIGHT;
-    _this6.direction = RIGHT;
-    _this6.bodySegments = _this6.body.getChildren();
-    _this6.onGod = false;
-    _this6.biteSound = _this6.scene.sound.add('bite', {
+    _this5 = _super6.call(this, scene, x, y);
+    _this5.headPosition = new Phaser.Geom.Point(x, y);
+    _this5.body = scene.add.group();
+    _this5.head = _this5.scene.physics.add.sprite(x * CELL, y * CELL, "head_".concat(mainMenu.texturePack)).play("liking_".concat(mainMenu.texturePack));
+    _this5.body.add(_this5.head);
+    _this5.head.setOrigin(0.5);
+    _this5.head.setScale(0.4);
+    _this5.head.setDepth(4);
+    _this5.head.rotation = 4.7;
+    _this5.alive = true;
+    _this5.speed = 130;
+    _this5.moveTime = 0;
+    _this5.tail = _this5.scene.physics.add.sprite(_this5.head.x, _this5.head.y, "tail_".concat(mainMenu.texturePack));
+    _this5.body.add(_this5.tail);
+    _this5.tail.setOrigin(0.5);
+    _this5.tail.setDisplaySize(32, 32);
+    _this5.tail.setSize(32, 32, true);
+    _this5.bodyGraphics = _this5.scene.add.graphics();
+    _this5.end = new Phaser.Geom.Point(x, y);
+    _this5.heading = RIGHT;
+    _this5.direction = RIGHT;
+    _this5.bodySegments = _this5.body.getChildren();
+    _this5.onGod = false;
+    _this5.biteSound = _this5.scene.sound.add('bite', {
       loop: false,
       volume: 0.5
     });
-    _this6.leftSound = _this6.scene.sound.add('left', {
+    _this5.leftSound = _this5.scene.sound.add('left', {
       loop: false,
       volume: 0.5
     });
-    _this6.rightSound = _this6.scene.sound.add('right', {
+    _this5.rightSound = _this5.scene.sound.add('right', {
       loop: false,
       volume: 0.5
     });
-    _this6.upSound = _this6.scene.sound.add('up', {
+    _this5.upSound = _this5.scene.sound.add('up', {
       loop: false,
       volume: 0.5
     });
-    _this6.downSound = _this6.scene.sound.add('down', {
+    _this5.downSound = _this5.scene.sound.add('down', {
       loop: false,
       volume: 0.5
     });
-    _this6.deadSound = _this6.scene.sound.add('lose', {
+    _this5.deadSound = _this5.scene.sound.add('lose', {
       loop: false,
       volume: 0.5
     });
 
     //this.turnPoints.push(turnPointL, turnPointR, turnPointU, turnPointD);
-    return _this6;
+    return _this5;
   }
   _createClass(Snake, [{
     key: "updateBodyGraphics",
@@ -757,7 +754,7 @@ var Snake = /*#__PURE__*/function (_Entity3) {
   }, {
     key: "grow",
     value: function grow() {
-      var _this7 = this;
+      var _this6 = this;
       this.bodySegments[1].setSize(30, 30, true);
       this.tail.setTexture("body_".concat(mainMenu.texturePack));
       this.tail.setDisplaySize(30, 30);
@@ -772,31 +769,31 @@ var Snake = /*#__PURE__*/function (_Entity3) {
         element.setDisplaySize(30, 30);
         element.setSize(30, 30, true);
         element.alpha = 0;
-        _this7.head.alpha = 1;
-        _this7.head.setScale(0.4);
+        _this6.head.alpha = 1;
+        _this6.head.setScale(0.4);
       });
       // this.head.setTexture(`head_${mainMenu.texturePack}`)
     }
   }, {
     key: "godMode",
     value: function godMode() {
-      var _this8 = this;
+      var _this7 = this;
       this.onGod = true;
       this.head.stop("liking_".concat(mainMenu.texturePack));
       this.head.play("onGodeAnimation_".concat(mainMenu.texturePack));
       setTimeout(function () {
-        _this8.onGod = false;
-        _this8.head.stop("onGodeAnimation_".concat(mainMenu.texturePack));
-        _this8.head.play("liking_".concat(mainMenu.texturePack));
+        _this7.onGod = false;
+        _this7.head.stop("onGodeAnimation_".concat(mainMenu.texturePack));
+        _this7.head.play("liking_".concat(mainMenu.texturePack));
       }, 15000);
     }
   }, {
     key: "speedUp",
     value: function speedUp() {
-      var _this9 = this;
+      var _this8 = this;
       this.speed -= 50;
       setTimeout(function () {
-        _this9.speed += 50;
+        _this8.speed += 50;
       }, 15000);
     }
   }, {
@@ -850,7 +847,7 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
   _createClass(SnakeGame, [{
     key: "create",
     value: function create() {
-      var _this10 = this;
+      var _this9 = this;
       try {
         gameState.onGame = true;
         gameState.onPause = false;
@@ -896,7 +893,7 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
         this.snake.grow();
         document.addEventListener('keydown', function (e) {
           if ((e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) && gameState.onGame) {
-            _this10.pause();
+            _this9.pause();
           }
         });
         this.loadScore();
@@ -914,7 +911,7 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
         }).setOrigin(0.5);
         this.getField();
       } catch (er) {
-        var _window8;
+        var _window6;
         var undefinedError = {
           action: 'undefinedError',
           allGameSessionId: sessionID,
@@ -923,7 +920,7 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window8 = window) === null || _window8 === void 0 || _window8.parent.postMessage(undefinedError, '*');
+        (_window6 = window) === null || _window6 === void 0 || _window6.parent.postMessage(undefinedError, '*');
       }
     }
 
@@ -957,12 +954,12 @@ var SnakeGame = /*#__PURE__*/function (_Phaser$Scene3) {
   }, {
     key: "addBonus",
     value: function addBonus(x, y, i) {
-      var _this11 = this;
+      var _this10 = this;
       if (gameState.score > 0 && gameState.score % 10 === 0) {
         this.bonus = new Bonus(this, x, y, "bonus_".concat(i), i);
         // this.physics.add.collider(this.snake.bodySegments[1], this.bonus.body, ()=>{this.bonus.bonusSound.play(); if(this.bonus.index == 0){this.snake.speedUp()}; if(this.bonus.index==1){this.snake.godMode()}; this.bonus.destroy()}, null, this);
         setTimeout(function () {
-          _this11.bonus.destroy();
+          _this10.bonus.destroy();
         }, 10000);
       }
     }
@@ -1096,11 +1093,11 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
   _createClass(ScenePause, [{
     key: "create",
     value: function create() {
-      var _this12 = this;
+      var _this11 = this;
       gameState.onPause = true;
       gameState.onGame = false;
       try {
-        var _window9;
+        var _window7;
         var gamePause = {
           action: 'gamePause',
           allGameSessionId: _startGame.allGameSessionId,
@@ -1108,7 +1105,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           score: gameState.score,
           timeStamp: Date.now()
         };
-        (_window9 = window) === null || _window9 === void 0 || _window9.parent.postMessage(gamePause, '*');
+        (_window7 = window) === null || _window7 === void 0 || _window7.parent.postMessage(gamePause, '*');
         this.bgpauseImage = this.add.image(game.config.width / 2, game.config.height / 2, "mainBG_".concat(mainMenu.texturePack)).setOrigin(0.5);
         this.bgpauseImage.setDisplaySize(game.config.width, game.config.height);
         this.pauseScreen = this.add.image(game.config.width / 2, game.config.height / 2, 'pause').setOrigin(0.5).setDisplaySize(game.config.width, game.config.height);
@@ -1142,7 +1139,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
         this.btnStart.on('pointerdown', this.resumeGame, this);
         document.addEventListener('keydown', function (e) {
           if ((e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) && gameState.onPause) {
-            _this12.onPressExit();
+            _this11.onPressExit();
           }
         });
         this.input.keyboard.on('keydown-ENTER', this.gameToggle, this);
@@ -1166,7 +1163,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           fill: '#fff'
         }).setOrigin(0.5);
       } catch (er) {
-        var _window10;
+        var _window8;
         var gamePauseError = {
           action: 'gamePauseError',
           allGameSessionId: _startGame.allGameSessionId,
@@ -1175,7 +1172,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window10 = window) === null || _window10 === void 0 || _window10.parent.postMessage(gamePauseError, '*');
+        (_window8 = window) === null || _window8 === void 0 || _window8.parent.postMessage(gamePauseError, '*');
       }
     }
   }, {
@@ -1246,7 +1243,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
       gameState.onPause = false;
       gameState.onGame = true;
       try {
-        var _window11;
+        var _window9;
         var gameResume = {
           action: 'gameResume',
           allGameSessionId: _startGame.allGameSessionId,
@@ -1254,11 +1251,11 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           score: gameState.score,
           timeStamp: Date.now()
         };
-        (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(gameResume, '*');
+        (_window9 = window) === null || _window9 === void 0 || _window9.parent.postMessage(gameResume, '*');
         this.scene.resume(snacegame);
         this.scene.stop(scenePause);
       } catch (er) {
-        var _window12;
+        var _window10;
         var gameResumeError = {
           action: 'gameResumeError',
           allGameSessionId: _startGame.allGameSessionId,
@@ -1267,7 +1264,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(gameResumeError, '*');
+        (_window10 = window) === null || _window10 === void 0 || _window10.parent.postMessage(gameResumeError, '*');
         this.scene.resume(snacegame);
         this.scene.stop(scenePause);
       }
@@ -1277,7 +1274,7 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
     value: function exit() {
       if (gameState.onPause) {
         if (!posted) {
-          var _window13, _window14;
+          var _window11, _window12;
           var closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId: sessionID,
@@ -1290,8 +1287,8 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
             score: gameState.score,
             timeStamp: Date.now()
           };
-          (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(_gameOver, '*');
-          (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(closeGameSession, '*');
+          (_window11 = window) === null || _window11 === void 0 || _window11.parent.postMessage(_gameOver, '*');
+          (_window12 = window) === null || _window12 === void 0 || _window12.parent.postMessage(closeGameSession, '*');
           posted = true;
         }
       }
@@ -1322,12 +1319,12 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
   _createClass(GameOver, [{
     key: "create",
     value: function create() {
-      var _this13 = this;
+      var _this12 = this;
       snacegame.bgmusic.stop();
       gameState.onGame = false;
       gameState.isOver = true;
       try {
-        var _window15;
+        var _window13;
         var _gameOver2 = {
           action: 'gameOver',
           allGameSessionId: sessionID,
@@ -1335,7 +1332,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           score: gameState.score,
           timeStamp: Date.now()
         };
-        (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(_gameOver2, '*');
+        (_window13 = window) === null || _window13 === void 0 || _window13.parent.postMessage(_gameOver2, '*');
         this.menuBG = this.add.image(game.config.width / 2, game.config.height / 2, "mainBG_".concat(mainMenu.texturePack)).setOrigin(0.5);
         this.menuBG.setDisplaySize(game.config.width, game.config.height);
         this.controlsInfo = this.add.image(310, 70, 'controlsInfo').setOrigin(0.5);
@@ -1384,7 +1381,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
         this.input.keyboard.on('keydown-ENTER', this.gameToggle, this);
         document.addEventListener('keydown', function (e) {
           if (e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) {
-            _this13.onPressExit();
+            _this12.onPressExit();
           }
         });
 
@@ -1399,7 +1396,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           fill: '#fff'
         }).setOrigin(0.5);
       } catch (er) {
-        var _window16;
+        var _window14;
         var gameOverError = {
           action: 'gameOverError',
           allGameSessionId: sessionID,
@@ -1408,7 +1405,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window16 = window) === null || _window16 === void 0 || _window16.parent.postMessage(gameOverError, '*');
+        (_window14 = window) === null || _window14 === void 0 || _window14.parent.postMessage(gameOverError, '*');
       }
     }
   }, {
@@ -1452,18 +1449,18 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
     key: "startGame",
     value: function startGame() {
       try {
-        var _window17;
+        var _window15;
         gameState.isOver = false;
         gameState.onPause = false;
         gameState.score = 0;
         mainMenu.texturePack = getTexturePack();
         _startGame.gameSessionId = generateUUID();
         _startGame.allGameSessionId = sessionID;
-        (_window17 = window) === null || _window17 === void 0 || _window17.parent.postMessage(_startGame, '*');
+        (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(_startGame, '*');
         this.scene.stop();
         this.scene.start('snakegame');
       } catch (er) {
-        var _window18;
+        var _window16;
         var startGameError = {
           action: 'startGameError',
           allGameSessionId: sessionID,
@@ -1471,7 +1468,7 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           error: er.message,
           timeStamp: Date.now()
         };
-        (_window18 = window) === null || _window18 === void 0 || _window18.parent.postMessage(startGameError, '*');
+        (_window16 = window) === null || _window16 === void 0 || _window16.parent.postMessage(startGameError, '*');
       }
     }
   }, {
@@ -1479,13 +1476,13 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
     value: function exit() {
       if (gameState.isOver) {
         if (!posted) {
-          var _window19;
+          var _window17;
           var closeGameSession = {
             action: 'closeGameSession',
             allGameSessionId: sessionID,
             timeStamp: Date.now()
           };
-          (_window19 = window) === null || _window19 === void 0 || _window19.parent.postMessage(closeGameSession, '*');
+          (_window17 = window) === null || _window17 === void 0 || _window17.parent.postMessage(closeGameSession, '*');
           posted = true;
         }
       }
@@ -1562,7 +1559,6 @@ try {
     timeStamp: Date.now()
   };
   window.onload = function () {
-    var _window20;
     var config = {
       type: Phaser.CANVAS,
       width: 1920,
@@ -1583,15 +1579,15 @@ try {
     var canvas = document.getElementsByTagName('canvas');
     canvas.outline = 0;
     game = new Phaser.Game(config);
-    (_window20 = window) === null || _window20 === void 0 || _window20.parent.postMessage(startGameSession, '*');
+    //window?.parent.postMessage(startGameSession, '*');
   };
 } catch (er) {
-  var _window21;
+  var _window18;
   var startGameSessionError = {
     action: 'startGameSessionError',
     allGameSessionId: sessionID,
     error: er.message,
     timeStamp: Date.now()
   };
-  (_window21 = window) === null || _window21 === void 0 ? void 0 : _window21.parent.postMessage(startGameSessionError, '*');
+  (_window18 = window) === null || _window18 === void 0 ? void 0 : _window18.parent.postMessage(startGameSessionError, '*');
 }

@@ -58,7 +58,7 @@ sessionID = generateUUID()
             
         
             game = new Phaser.Game(config);
-            window?.parent.postMessage(startGameSession, '*');
+            //window?.parent.postMessage(startGameSession, '*');
         }
       }
       

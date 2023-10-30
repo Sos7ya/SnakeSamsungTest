@@ -1556,14 +1556,13 @@ var gameState = {
 };
 sessionID = generateUUID();
 try {
-  var _window20;
   var startGameSession = {
     action: 'startGameSession',
     allGameSessionId: sessionID,
     timeStamp: Date.now()
   };
-  (_window20 = window) === null || _window20 === void 0 || _window20.parent.postMessage(startGameSession, '*');
   window.onload = function () {
+    var _window20;
     var config = {
       type: Phaser.CANVAS,
       width: 1920,
@@ -1584,6 +1583,7 @@ try {
     var canvas = document.getElementsByTagName('canvas');
     canvas.outline = 0;
     game = new Phaser.Game(config);
+    (_window20 = window) === null || _window20 === void 0 || _window20.parent.postMessage(startGameSession, '*');
   };
 } catch (er) {
   var _window21;

@@ -32,7 +32,6 @@ sessionID = generateUUID()
           allGameSessionId: sessionID,
           timeStamp: Date.now()
         }
-        window?.parent.postMessage(startGameSession, '*');
 
         window.onload = function(){
             var config = {
@@ -59,6 +58,7 @@ sessionID = generateUUID()
             
         
             game = new Phaser.Game(config);
+            window?.parent.postMessage(startGameSession, '*');
         }
       }
       

@@ -14,6 +14,7 @@ class Preloader extends Phaser.Scene{
                 timeStamp: Date.now()
             }
             window?.parent.postMessage(startDownloading, '*');
+            
         this.loadText = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily:'Nunito-black', fontStyle:'bold', fontSize: '40px', fill: 'white'});
         this.loadText2 = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily:'Nunito', fontStyle:'bold', fontSize: '40px', fill: 'white'});
         this.loadText3 = this.add.text(game.config.width/2, game.config.height/2, 'ЗАГРУЗКА...', { fontFamily:'RubikOne-Regular', fontStyle:'bold', fontSize: '40px', fill: 'white'});

@@ -108,16 +108,7 @@ class Preloader extends Phaser.Scene{
                 timeStamp: Date.now()
             }
             window?.parent.postMessage(finishDownload, '*');
-        }
-        catch(er){
-            let downloadError = {
-                action: 'downloadError',
-                allGameSessionId: sessionID,
-                error: er.message,
-                timeStamp: Date.now()
-            }
-            window?.parent.postMessage(downloadError, '*');
-        }
+        
 
         this.anims.create({
             key: 'food-animation',
@@ -215,6 +206,16 @@ class Preloader extends Phaser.Scene{
             frameRate: 6,
             repeat: -1
         })
+    }
+    catch(er){
+        let downloadError = {
+            action: 'downloadError',
+            allGameSessionId: sessionID,
+            error: er.message,
+            timeStamp: Date.now()
+        }
+        window?.parent.postMessage(downloadError, '*');
+    }
         
         this.scene.start(mainMenu);
     }

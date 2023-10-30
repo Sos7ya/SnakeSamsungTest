@@ -16,18 +16,7 @@ class GameOver extends Phaser.Scene{
                 timeStamp : Date.now()
             }
             window?.parent.postMessage(gameOver, '*');
-        }
-        catch(er){
-            let gameOverError = {
-                action: 'gameOverError',
-                allGameSessionId : sessionID,
-                gameSessionId : startGame.gameSessionId,
-                score : gameState.score,
-                error: er.message,
-                timeStamp : Date.now()
-            }
-            window?.parent.postMessage(gameOverError, '*');
-        }
+        
 
         this.menuBG = this.add.image(game.config.width/2, game.config.height/2, `mainBG_${mainMenu.texturePack}`).setOrigin(0.5)
         this.menuBG.setDisplaySize(game.config.width, game.config.height)
@@ -92,6 +81,18 @@ class GameOver extends Phaser.Scene{
         this.loadScore();
 
         this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, `${game_version}`, { fontFamily:'Nunito', fontStyle:'bold', fontSize: '30px', fill: '#fff' }).setOrigin(0.5);
+    }
+    catch(er){
+        let gameOverError = {
+            action: 'gameOverError',
+            allGameSessionId : sessionID,
+            gameSessionId : startGame.gameSessionId,
+            score : gameState.score,
+            error: er.message,
+            timeStamp : Date.now()
+        }
+        window?.parent.postMessage(gameOverError, '*');
+    }
     }
 
     selectorDown(){

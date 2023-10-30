@@ -150,6 +150,121 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
           timeStamp: Date.now()
         };
         (_window3 = window) === null || _window3 === void 0 || _window3.parent.postMessage(finishDownload, '*');
+        this.anims.create({
+          key: 'food-animation',
+          frames: [{
+            key: 'food_small',
+            duration: 500
+          }, {
+            key: 'food',
+            duration: 500
+          }, {
+            key: 'food_big',
+            duration: 500
+          }],
+          frameRate: 6,
+          repeat: -1
+        });
+
+        // this.bonus = new Bonus(this, -1, -1, `bonus_${1}`, 1);
+        // this.bonus.alpha = 0
+
+        this.anims.create({
+          key: 'liking_0',
+          frames: [{
+            key: "head_0"
+          }, {
+            key: "head_lick_0",
+            duration: 1000
+          }],
+          frameRate: 6,
+          repeat: -1
+        });
+        this.anims.create({
+          key: 'liking_1',
+          frames: [{
+            key: "head_1"
+          }, {
+            key: "head_lick_1",
+            duration: 1000
+          }],
+          frameRate: 6,
+          repeat: -1
+        });
+        this.anims.create({
+          key: 'liking_2',
+          frames: [{
+            key: "head_2"
+          }, {
+            key: "head_lick_2",
+            duration: 1000
+          }],
+          frameRate: 6,
+          repeat: -1
+        });
+        this.anims.create({
+          key: 'onGodeAnimation_0',
+          frames: [{
+            key: "head_helmet_0"
+          }, {
+            key: "head_helmet_nolick_0",
+            duration: 1000
+          }],
+          frameRate: 4,
+          repeat: -1
+        });
+        this.anims.create({
+          key: 'onGodeAnimation_1',
+          frames: [{
+            key: "head_helmet_1"
+          }, {
+            key: "head_helmet_nolick_1",
+            duration: 1000
+          }],
+          frameRate: 4,
+          repeat: -1
+        });
+        this.anims.create({
+          key: 'onGodeAnimation_2',
+          frames: [{
+            key: "head_helmet_2"
+          }, {
+            key: "head_helmet_nolick_2",
+            duration: 1000
+          }],
+          frameRate: 4,
+          repeat: -1
+        });
+        this.anims.create({
+          key: 'bonus-animation_0',
+          frames: [{
+            key: "bonus_small_".concat(0),
+            duration: 500
+          }, {
+            key: "bonus_".concat(0),
+            duration: 500
+          }, {
+            key: "bonus_big_".concat(0),
+            duration: 500
+          }],
+          frameRate: 6,
+          repeat: -1
+        });
+        this.anims.create({
+          key: 'bonus-animation_1',
+          frames: [{
+            key: "bonus_small_".concat(1),
+            duration: 500
+          }, {
+            key: "bonus_".concat(1),
+            duration: 500
+          }, {
+            key: "bonus_big_".concat(1),
+            duration: 500
+          }],
+          frameRate: 6,
+          repeat: -1
+        });
       } catch (er) {
         var _window4;
         var downloadError = {
@@ -160,121 +275,6 @@ var Preloader = /*#__PURE__*/function (_Phaser$Scene) {
         };
         (_window4 = window) === null || _window4 === void 0 || _window4.parent.postMessage(downloadError, '*');
       }
-      this.anims.create({
-        key: 'food-animation',
-        frames: [{
-          key: 'food_small',
-          duration: 500
-        }, {
-          key: 'food',
-          duration: 500
-        }, {
-          key: 'food_big',
-          duration: 500
-        }],
-        frameRate: 6,
-        repeat: -1
-      });
-
-      // this.bonus = new Bonus(this, -1, -1, `bonus_${1}`, 1);
-      // this.bonus.alpha = 0
-
-      this.anims.create({
-        key: 'liking_0',
-        frames: [{
-          key: "head_0"
-        }, {
-          key: "head_lick_0",
-          duration: 1000
-        }],
-        frameRate: 6,
-        repeat: -1
-      });
-      this.anims.create({
-        key: 'liking_1',
-        frames: [{
-          key: "head_1"
-        }, {
-          key: "head_lick_1",
-          duration: 1000
-        }],
-        frameRate: 6,
-        repeat: -1
-      });
-      this.anims.create({
-        key: 'liking_2',
-        frames: [{
-          key: "head_2"
-        }, {
-          key: "head_lick_2",
-          duration: 1000
-        }],
-        frameRate: 6,
-        repeat: -1
-      });
-      this.anims.create({
-        key: 'onGodeAnimation_0',
-        frames: [{
-          key: "head_helmet_0"
-        }, {
-          key: "head_helmet_nolick_0",
-          duration: 1000
-        }],
-        frameRate: 4,
-        repeat: -1
-      });
-      this.anims.create({
-        key: 'onGodeAnimation_1',
-        frames: [{
-          key: "head_helmet_1"
-        }, {
-          key: "head_helmet_nolick_1",
-          duration: 1000
-        }],
-        frameRate: 4,
-        repeat: -1
-      });
-      this.anims.create({
-        key: 'onGodeAnimation_2',
-        frames: [{
-          key: "head_helmet_2"
-        }, {
-          key: "head_helmet_nolick_2",
-          duration: 1000
-        }],
-        frameRate: 4,
-        repeat: -1
-      });
-      this.anims.create({
-        key: 'bonus-animation_0',
-        frames: [{
-          key: "bonus_small_".concat(0),
-          duration: 500
-        }, {
-          key: "bonus_".concat(0),
-          duration: 500
-        }, {
-          key: "bonus_big_".concat(0),
-          duration: 500
-        }],
-        frameRate: 6,
-        repeat: -1
-      });
-      this.anims.create({
-        key: 'bonus-animation_1',
-        frames: [{
-          key: "bonus_small_".concat(1),
-          duration: 500
-        }, {
-          key: "bonus_".concat(1),
-          duration: 500
-        }, {
-          key: "bonus_big_".concat(1),
-          duration: 500
-        }],
-        frameRate: 6,
-        repeat: -1
-      });
       this.scene.start(mainMenu);
     }
   }]);
@@ -1109,6 +1109,62 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
           timeStamp: Date.now()
         };
         (_window9 = window) === null || _window9 === void 0 || _window9.parent.postMessage(gamePause, '*');
+        this.bgpauseImage = this.add.image(game.config.width / 2, game.config.height / 2, "mainBG_".concat(mainMenu.texturePack)).setOrigin(0.5);
+        this.bgpauseImage.setDisplaySize(game.config.width, game.config.height);
+        this.pauseScreen = this.add.image(game.config.width / 2, game.config.height / 2, 'pause').setOrigin(0.5).setDisplaySize(game.config.width, game.config.height);
+        this.btnStart = this.add.sprite(game.config.width / 2, game.config.height / 2 + 100, 'button').setScale(0.5);
+        this.btnStart.setOrigin(0.5);
+        this.controlsInfo = this.add.image(310, 70, 'controlsInfo').setOrigin(0.5);
+        this.btnClose = this.add.sprite(this.btnStart.x, this.btnStart.y + 120, 'button').setScale(0.43);
+        this.btnClose.setOrigin(0.5);
+        this.selector = this.add.image(game.config.width / 2, game.config.height / 2 + 100, "selector");
+        this.selector.setScale(0.44);
+        this.selector.setOrigin(0.5);
+        this.btnStartText = this.add.text(game.config.width / 2, game.config.height / 2 + 100, 'ПРОДОЛЖИТЬ', {
+          fontFamily: 'Nunito',
+          fontSize: '60px',
+          color: 'white',
+          fontStyle: 'bold',
+          align: 'center'
+        });
+        this.btnStartText.setOrigin(0.5);
+        this.btnCloseText = this.add.text(this.btnClose.x, this.btnClose.y, 'ВЫЙТИ', {
+          fontFamily: 'Nunito',
+          fontSize: '45px',
+          color: '#F0516B',
+          fontStyle: 'bold',
+          align: 'center'
+        });
+        this.btnCloseText.setOrigin(0.5);
+        this.btnStart.setInteractive();
+        this.btnClose.setInteractive();
+        this.btnClose.on('pointerdown', this.exit, this);
+        this.btnStart.on('pointerdown', this.resumeGame, this);
+        document.addEventListener('keydown', function (e) {
+          if ((e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) && gameState.onPause) {
+            _this12.onPressExit();
+          }
+        });
+        this.input.keyboard.on('keydown-ENTER', this.gameToggle, this);
+        this.scoreText = this.add.text(game.config.width / 2 - 150, game.config.height - 100, "".concat(gameState.score), {
+          fontFamily: 'Rubik-Medium',
+          fontStyle: 'normal',
+          fontSize: '64px',
+          fill: '#fff'
+        }).setOrigin(0.5);
+        this.scoreTitle = this.add.text(this.scoreText.x, this.scoreText.y - 75, 'Счет', {
+          fontFamily: 'Rubik-Regular',
+          fontSize: '48px',
+          fill: '#D0DBD1'
+        }).setOrigin(0.5);
+        this.saveScore();
+        this.loadScore();
+        this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, "".concat(game_version), {
+          fontFamily: 'Nunito-black',
+          fontStyle: 'bold',
+          fontSize: '30px',
+          fill: '#fff'
+        }).setOrigin(0.5);
       } catch (er) {
         var _window10;
         var gamePauseError = {
@@ -1121,62 +1177,6 @@ var ScenePause = /*#__PURE__*/function (_Phaser$Scene4) {
         };
         (_window10 = window) === null || _window10 === void 0 || _window10.parent.postMessage(gamePauseError, '*');
       }
-      this.bgpauseImage = this.add.image(game.config.width / 2, game.config.height / 2, "mainBG_".concat(mainMenu.texturePack)).setOrigin(0.5);
-      this.bgpauseImage.setDisplaySize(game.config.width, game.config.height);
-      this.pauseScreen = this.add.image(game.config.width / 2, game.config.height / 2, 'pause').setOrigin(0.5).setDisplaySize(game.config.width, game.config.height);
-      this.btnStart = this.add.sprite(game.config.width / 2, game.config.height / 2 + 100, 'button').setScale(0.5);
-      this.btnStart.setOrigin(0.5);
-      this.controlsInfo = this.add.image(310, 70, 'controlsInfo').setOrigin(0.5);
-      this.btnClose = this.add.sprite(this.btnStart.x, this.btnStart.y + 120, 'button').setScale(0.43);
-      this.btnClose.setOrigin(0.5);
-      this.selector = this.add.image(game.config.width / 2, game.config.height / 2 + 100, "selector");
-      this.selector.setScale(0.44);
-      this.selector.setOrigin(0.5);
-      this.btnStartText = this.add.text(game.config.width / 2, game.config.height / 2 + 100, 'ПРОДОЛЖИТЬ', {
-        fontFamily: 'Nunito',
-        fontSize: '60px',
-        color: 'white',
-        fontStyle: 'bold',
-        align: 'center'
-      });
-      this.btnStartText.setOrigin(0.5);
-      this.btnCloseText = this.add.text(this.btnClose.x, this.btnClose.y, 'ВЫЙТИ', {
-        fontFamily: 'Nunito',
-        fontSize: '45px',
-        color: '#F0516B',
-        fontStyle: 'bold',
-        align: 'center'
-      });
-      this.btnCloseText.setOrigin(0.5);
-      this.btnStart.setInteractive();
-      this.btnClose.setInteractive();
-      this.btnClose.on('pointerdown', this.exit, this);
-      this.btnStart.on('pointerdown', this.resumeGame, this);
-      document.addEventListener('keydown', function (e) {
-        if ((e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) && gameState.onPause) {
-          _this12.onPressExit();
-        }
-      });
-      this.input.keyboard.on('keydown-ENTER', this.gameToggle, this);
-      this.scoreText = this.add.text(game.config.width / 2 - 150, game.config.height - 100, "".concat(gameState.score), {
-        fontFamily: 'Rubik-Medium',
-        fontStyle: 'normal',
-        fontSize: '64px',
-        fill: '#fff'
-      }).setOrigin(0.5);
-      this.scoreTitle = this.add.text(this.scoreText.x, this.scoreText.y - 75, 'Счет', {
-        fontFamily: 'Rubik-Regular',
-        fontSize: '48px',
-        fill: '#D0DBD1'
-      }).setOrigin(0.5);
-      this.saveScore();
-      this.loadScore();
-      this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, "".concat(game_version), {
-        fontFamily: 'Nunito-black',
-        fontStyle: 'bold',
-        fontSize: '30px',
-        fill: '#fff'
-      }).setOrigin(0.5);
     }
   }, {
     key: "saveScore",
@@ -1336,6 +1336,68 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
           timeStamp: Date.now()
         };
         (_window15 = window) === null || _window15 === void 0 || _window15.parent.postMessage(_gameOver2, '*');
+        this.menuBG = this.add.image(game.config.width / 2, game.config.height / 2, "mainBG_".concat(mainMenu.texturePack)).setOrigin(0.5);
+        this.menuBG.setDisplaySize(game.config.width, game.config.height);
+        this.controlsInfo = this.add.image(310, 70, 'controlsInfo').setOrigin(0.5);
+        this.gameOverImg = this.add.image(game.config.width / 2, game.config.height / 2, 'menuGameOver').setOrigin(0.5);
+        this.gameOverImg.setDisplaySize(game.config.width, game.config.height);
+        this.score = this.add.text(game.config.width / 2 - 150, game.config.height - 100, "".concat(gameState.score), {
+          fontFamily: 'Rubik-Regular',
+          fontStyle: 'bold',
+          fontSize: '64px',
+          fill: '#fff'
+        }).setOrigin(0.5);
+        this.scoreTitle = this.add.text(this.score.x, this.score.y - 75, "Счёт", {
+          fontFamily: 'Rubik-Regular',
+          fontSize: 48,
+          fontStyle: 'normal',
+          color: '#D0DBD1'
+        }).setOrigin(0.5);
+        this.btnRestart = this.add.sprite(game.config.width / 2, game.config.height / 2 + 100, 'button');
+        this.btnRestart.setOrigin(0.5);
+        this.btnRestart.setScale(0.5);
+        this.btnClose = this.add.sprite(this.btnRestart.x, this.btnRestart.y + 120, 'button').setScale(0.43);
+        this.btnClose.setOrigin(0.5);
+        this.selector = this.add.sprite(this.btnRestart.x, this.btnRestart.y, 'selector');
+        this.selector.setOrigin(0.5);
+        this.selector.setScale(0.44);
+        this.btnRestart.setInteractive();
+        this.btnClose.setInteractive();
+        this.btnRestartText = this.add.text(game.config.width / 2, game.config.height / 2 + 100, "ЗАНОВО", {
+          fontFamily: 'Nunito',
+          fontSize: '60px',
+          fontStyle: 'bold',
+          align: 'center',
+          color: 'white'
+        });
+        this.btnRestartText.setOrigin(0.5);
+        this.btnCloseText = this.add.text(this.btnClose.x, this.btnClose.y, "ВЫЙТИ", {
+          fontFamily: 'Nunito',
+          fontSize: '45px',
+          fontStyle: 'bold',
+          align: 'center',
+          color: '#F0516B'
+        });
+        this.btnCloseText.setOrigin(0.5);
+        this.btnRestart.on('pointerdown', this.startGame, this);
+        this.btnClose.on('pointerdown', this.exit, this);
+        this.input.keyboard.on('keydown-ENTER', this.gameToggle, this);
+        document.addEventListener('keydown', function (e) {
+          if (e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) {
+            _this13.onPressExit();
+          }
+        });
+
+        // this.input.keyboard.on('keydown-BACKSPACE', ()=>{this.exit()}, this)
+
+        this.saveScore();
+        this.loadScore();
+        this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, "".concat(game_version), {
+          fontFamily: 'Nunito',
+          fontStyle: 'bold',
+          fontSize: '30px',
+          fill: '#fff'
+        }).setOrigin(0.5);
       } catch (er) {
         var _window16;
         var gameOverError = {
@@ -1348,68 +1410,6 @@ var GameOver = /*#__PURE__*/function (_Phaser$Scene5) {
         };
         (_window16 = window) === null || _window16 === void 0 || _window16.parent.postMessage(gameOverError, '*');
       }
-      this.menuBG = this.add.image(game.config.width / 2, game.config.height / 2, "mainBG_".concat(mainMenu.texturePack)).setOrigin(0.5);
-      this.menuBG.setDisplaySize(game.config.width, game.config.height);
-      this.controlsInfo = this.add.image(310, 70, 'controlsInfo').setOrigin(0.5);
-      this.gameOverImg = this.add.image(game.config.width / 2, game.config.height / 2, 'menuGameOver').setOrigin(0.5);
-      this.gameOverImg.setDisplaySize(game.config.width, game.config.height);
-      this.score = this.add.text(game.config.width / 2 - 150, game.config.height - 100, "".concat(gameState.score), {
-        fontFamily: 'Rubik-Regular',
-        fontStyle: 'bold',
-        fontSize: '64px',
-        fill: '#fff'
-      }).setOrigin(0.5);
-      this.scoreTitle = this.add.text(this.score.x, this.score.y - 75, "Счёт", {
-        fontFamily: 'Rubik-Regular',
-        fontSize: 48,
-        fontStyle: 'normal',
-        color: '#D0DBD1'
-      }).setOrigin(0.5);
-      this.btnRestart = this.add.sprite(game.config.width / 2, game.config.height / 2 + 100, 'button');
-      this.btnRestart.setOrigin(0.5);
-      this.btnRestart.setScale(0.5);
-      this.btnClose = this.add.sprite(this.btnRestart.x, this.btnRestart.y + 120, 'button').setScale(0.43);
-      this.btnClose.setOrigin(0.5);
-      this.selector = this.add.sprite(this.btnRestart.x, this.btnRestart.y, 'selector');
-      this.selector.setOrigin(0.5);
-      this.selector.setScale(0.44);
-      this.btnRestart.setInteractive();
-      this.btnClose.setInteractive();
-      this.btnRestartText = this.add.text(game.config.width / 2, game.config.height / 2 + 100, "ЗАНОВО", {
-        fontFamily: 'Nunito',
-        fontSize: '60px',
-        fontStyle: 'bold',
-        align: 'center',
-        color: 'white'
-      });
-      this.btnRestartText.setOrigin(0.5);
-      this.btnCloseText = this.add.text(this.btnClose.x, this.btnClose.y, "ВЫЙТИ", {
-        fontFamily: 'Nunito',
-        fontSize: '45px',
-        fontStyle: 'bold',
-        align: 'center',
-        color: '#F0516B'
-      });
-      this.btnCloseText.setOrigin(0.5);
-      this.btnRestart.on('pointerdown', this.startGame, this);
-      this.btnClose.on('pointerdown', this.exit, this);
-      this.input.keyboard.on('keydown-ENTER', this.gameToggle, this);
-      document.addEventListener('keydown', function (e) {
-        if (e.keyCode == 8 || e.keyCode == 10009 || e.keyCode == 461 || e.keyCode == 166 || e.keyCode == 196) {
-          _this13.onPressExit();
-        }
-      });
-
-      // this.input.keyboard.on('keydown-BACKSPACE', ()=>{this.exit()}, this)
-
-      this.saveScore();
-      this.loadScore();
-      this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, "".concat(game_version), {
-        fontFamily: 'Nunito',
-        fontStyle: 'bold',
-        fontSize: '30px',
-        fill: '#fff'
-      }).setOrigin(0.5);
     }
   }, {
     key: "selectorDown",
@@ -1540,7 +1540,7 @@ var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
 var CELL = 32;
-var game_version = 'v 0.4.6s';
+var game_version = 'v 0.4.7s';
 var posted = false;
 var sessionID;
 var gameId = generateUUID();
@@ -1554,28 +1554,6 @@ var gameState = {
   onGame: false,
   score: 0
 };
-window.onload = function () {
-  var config = {
-    type: Phaser.CANVAS,
-    width: 1920,
-    height: 1080,
-    backgroundColor: '#000',
-    parent: "phaser-example",
-    scene: [preloader, mainMenu, snacegame, scenePause, gameOver],
-    physics: {
-      "default": 'arcade'
-    },
-    scale: {
-      mode: Phaser.Scale.FIT
-    },
-    audio: {
-      disableWebAudio: true
-    }
-  };
-  var canvas = document.getElementsByTagName('canvas');
-  canvas.outline = 0;
-  game = new Phaser.Game(config);
-};
 sessionID = generateUUID();
 try {
   var _window20;
@@ -1584,7 +1562,29 @@ try {
     allGameSessionId: sessionID,
     timeStamp: Date.now()
   };
-  (_window20 = window) === null || _window20 === void 0 ? void 0 : _window20.parent.postMessage(startGameSession, '*');
+  (_window20 = window) === null || _window20 === void 0 || _window20.parent.postMessage(startGameSession, '*');
+  window.onload = function () {
+    var config = {
+      type: Phaser.CANVAS,
+      width: 1920,
+      height: 1080,
+      backgroundColor: '#000',
+      parent: "phaser-example",
+      scene: [preloader, mainMenu, snacegame, scenePause, gameOver],
+      physics: {
+        "default": 'arcade'
+      },
+      scale: {
+        mode: Phaser.Scale.FIT
+      },
+      audio: {
+        disableWebAudio: true
+      }
+    };
+    var canvas = document.getElementsByTagName('canvas');
+    canvas.outline = 0;
+    game = new Phaser.Game(config);
+  };
 } catch (er) {
   var _window21;
   var startGameSessionError = {

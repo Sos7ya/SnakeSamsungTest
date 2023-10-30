@@ -15,19 +15,7 @@ class ScenePause extends Phaser.Scene{
                 timeStamp : Date.now()
             }
             window?.parent.postMessage(gamePause, '*');
-        }
-        catch(er){
-            let gamePauseError = {
-                action: 'gamePauseError',
-                allGameSessionId: startGame.allGameSessionId,
-                gameSessionId: startGame.gameSessionId,
-                score: gameState.score,
-                error: er.message,
-                timeStamp : Date.now()
-            }
-    
-            window?.parent.postMessage(gamePauseError, '*');
-        }
+        
 
         this.bgpauseImage = this.add.image(game.config.width/2, game.config.height/2, `mainBG_${mainMenu.texturePack}`).setOrigin(0.5)
         this.bgpauseImage.setDisplaySize(game.config.width, game.config.height)
@@ -76,9 +64,20 @@ class ScenePause extends Phaser.Scene{
         this.scoreTitle = this.add.text(this.scoreText.x, this.scoreText.y-75, 'Счет', {fontFamily: 'Rubik-Regular', fontSize: '48px', fill: '#D0DBD1'}).setOrigin(0.5);
         this.saveScore();
         this.loadScore();
-        
-        
         this.versionText = this.add.text(game.config.width - 60, game.config.height - 40, `${game_version}`, { fontFamily:'Nunito-black', fontStyle:'bold', fontSize: '30px', fill: '#fff' }).setOrigin(0.5);
+    }
+    catch(er){
+        let gamePauseError = {
+            action: 'gamePauseError',
+            allGameSessionId: startGame.allGameSessionId,
+            gameSessionId: startGame.gameSessionId,
+            score: gameState.score,
+            error: er.message,
+            timeStamp : Date.now()
+        }
+
+        window?.parent.postMessage(gamePauseError, '*');
+    }
     }
 
     saveScore(){

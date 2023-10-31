@@ -7,10 +7,12 @@ var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
 var CELL = 32;
-var game_version = 'v 0.4.7s';
+var game_version = 'v 0.4.8s';
 var posted = false;
 var sessionID;
 var gameId = generateUUID();
+
+var parentOrigin;
 
 function getTexturePack(){
     return Math.floor(Math.random()*3);
@@ -55,10 +57,10 @@ sessionID = generateUUID()
         
             let canvas = document.getElementsByTagName('canvas');
             canvas.outline = 0;
-            
+            parentOrigin = new URL(document.referrer);
         
             game = new Phaser.Game(config);
-            window?.parent.postMessage(startGameSession, '*');
+            window?.parent.postMessage(startGameSession, `${parentOrigin}`);
         }
       }
       
@@ -69,5 +71,5 @@ sessionID = generateUUID()
           error: er.message,
           timeStamp: Date.now()
         }
-        window?.parent.postMessage(startGameSessionError, '*');
+        window?.parent.postMessage(startGameSessionError, `${parentOrigin}`);
     }

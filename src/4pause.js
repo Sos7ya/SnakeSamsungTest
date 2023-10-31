@@ -14,7 +14,7 @@ class ScenePause extends Phaser.Scene{
                 score: gameState.score,
                 timeStamp : Date.now()
             }
-            window?.parent.postMessage(gamePause, '*');
+            window?.parent.postMessage(gamePause, `${parentOrigin}`);
         
 
         this.bgpauseImage = this.add.image(game.config.width/2, game.config.height/2, `mainBG_${mainMenu.texturePack}`).setOrigin(0.5)
@@ -76,7 +76,7 @@ class ScenePause extends Phaser.Scene{
             timeStamp : Date.now()
         }
 
-        window?.parent.postMessage(gamePauseError, '*');
+        window?.parent.postMessage(gamePauseError, `${parentOrigin}`);
     }
     }
 
@@ -142,7 +142,7 @@ class ScenePause extends Phaser.Scene{
                 timeStamp : Date.now()
             }
 
-            window?.parent.postMessage(gameResume, '*');
+            window?.parent.postMessage(gameResume, `${parentOrigin}`);
             this.scene.resume(snacegame);
             this.scene.stop(scenePause);
         }
@@ -156,7 +156,7 @@ class ScenePause extends Phaser.Scene{
                 timeStamp : Date.now()
             }
 
-            window?.parent.postMessage(gameResumeError, '*');
+            window?.parent.postMessage(gameResumeError, `${parentOrigin}`);
             this.scene.resume(snacegame);
             this.scene.stop(scenePause);
         }
@@ -178,9 +178,9 @@ class ScenePause extends Phaser.Scene{
                         timeStamp : Date.now()
                     }
             
-                    window?.parent.postMessage(gameOver, '*');
+                    window?.parent.postMessage(gameOver, `${parentOrigin}`);
         
-                window?.parent.postMessage(closeGameSession, '*');
+                window?.parent.postMessage(closeGameSession, `${parentOrigin}`);
                 posted = true;
             }
     }

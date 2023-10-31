@@ -15,7 +15,7 @@ class GameOver extends Phaser.Scene{
                 score : gameState.score,
                 timeStamp : Date.now()
             }
-            window?.parent.postMessage(gameOver, '*');
+            window?.parent.postMessage(gameOver, `${parentOrigin}`);
         
 
         this.menuBG = this.add.image(game.config.width/2, game.config.height/2, `mainBG_${mainMenu.texturePack}`).setOrigin(0.5)
@@ -91,7 +91,7 @@ class GameOver extends Phaser.Scene{
             error: er.message,
             timeStamp : Date.now()
         }
-        window?.parent.postMessage(gameOverError, '*');
+        window?.parent.postMessage(gameOverError, `${parentOrigin}`);
     }
     }
 
@@ -139,7 +139,7 @@ class GameOver extends Phaser.Scene{
 
             startGame.gameSessionId = generateUUID();
             startGame.allGameSessionId = sessionID;
-            window?.parent.postMessage(startGame, '*');
+            window?.parent.postMessage(startGame, `${parentOrigin}`);
 
             this.scene.stop()
             this.scene.start('snakegame')
@@ -153,7 +153,7 @@ class GameOver extends Phaser.Scene{
                 error: er.message,
                 timeStamp: Date.now()
             }
-            window?.parent.postMessage(startGameError, '*');
+            window?.parent.postMessage(startGameError, `${parentOrigin}`);
         }
 
         
@@ -167,7 +167,7 @@ class GameOver extends Phaser.Scene{
                     timeStamp : Date.now()
                     }
         
-                window?.parent.postMessage(closeGameSession, '*');
+                window?.parent.postMessage(closeGameSession, `${parentOrigin}`);
                 posted = true;
             }
         }

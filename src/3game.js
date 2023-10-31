@@ -85,7 +85,7 @@ class SnakeGame extends Phaser.Scene{
             error: er.message,
             timeStamp : Date.now()
         }
-        window?.parent.postMessage(undefinedError, '*');
+        window?.parent.postMessage(undefinedError, `${parentOrigin}`);
     }
     }
 

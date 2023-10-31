@@ -60,6 +60,9 @@ sessionID = generateUUID()
             if(document.referrer){
                 parentOrigin = document.referrer
             }
+            else{
+                parentOrigin = '*';
+            }
         
             game = new Phaser.Game(config);
             window?.parent.postMessage(startGameSession, `${parentOrigin}`);

@@ -1581,9 +1581,7 @@ try {
     var canvas = document.getElementsByTagName('canvas');
     canvas.outline = 0;
     if (document.referrer) {
-      parentOrigin = new URL(document.referrer).origin;
-    } else {
-      parentOrigin = '*';
+      parentOrigin = document.referrer;
     }
     game = new Phaser.Game(config);
     (_window20 = window) === null || _window20 === void 0 || _window20.parent.postMessage(startGameSession, "".concat(parentOrigin));

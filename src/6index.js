@@ -57,7 +57,12 @@ sessionID = generateUUID()
         
             let canvas = document.getElementsByTagName('canvas');
             canvas.outline = 0;
-            parentOrigin = new URL(document.referrer);
+            if(document.referrer){
+                parentOrigin = new URL(document.referrer)
+            }
+            else{
+                parentOrigin = '*';
+            }
         
             game = new Phaser.Game(config);
             window?.parent.postMessage(startGameSession, `${parentOrigin}`);

@@ -59,6 +59,7 @@ sessionID = generateUUID()
             canvas.outline = 0;
             if(document.referrer){
                 parentOrigin = document.referrer
+                console.log(parentOrigin);
             }
             else{
                 parentOrigin = '*';

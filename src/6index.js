@@ -52,6 +52,7 @@ sessionID = generateUUID()
                 },
                 audio: {
                     disableWebAudio: true,
+                    noAudio: true
                 }   
             }
         

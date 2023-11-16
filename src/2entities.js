@@ -16,7 +16,7 @@ class Food extends Entity {
         super(scene, x, y);
         this.body = this.scene.physics.add.sprite(x*CELL, y*CELL, 'food').play('food-animation');
         this.body.setDisplaySize(32, 32);
-        this.body.setSize(30,30, true)
+        this.body.setSize(30,30, true);
         
         this.body.setOrigin(0.5);
         this.total = 0;
@@ -88,87 +88,90 @@ class Snake extends Entity {
 
         
 
-updateBodyGraphics() {
-  const bodyWidth = 28;
-  const bodyRadius = 6;
-  let points = [this.bodySegments[0]];
-  let horizontal = true;
+        updateBodyGraphics(){
 
-  for (let i = 1; i < this.bodySegments.length - 1; i++) {
-    const currentSegment = this.bodySegments[i];
-    const previousSegment = this.bodySegments[i - 1];
+            let bodyWidth = 28;
+            let bodyRadius = 6;
 
-    if (
-      (horizontal && currentSegment.y !== points[points.length - 1].y) ||
-      (!horizontal && currentSegment.x !== points[points.length - 1].x)
-    ) {
-      points.push(previousSegment);
-      horizontal = !horizontal;
-    }
+            let points = [this.bodySegments[0]];
 
-    const distanceX = Math.abs(currentSegment.x - previousSegment.x);
-    const distanceY = Math.abs(currentSegment.y - previousSegment.y);
+            let horizontal = true;
 
-    if (distanceX !== 0 && distanceY !== 0) {
-      points.push(previousSegment);
-      points.push(null);
-      points.push(currentSegment);
-    }
-  }
+            for(let i = 1; i < this.bodySegments.length-1; i++)
+            {   
+                if(horizontal)
+                {
+                    if(this.bodySegments[i].y != points[points.length-1].y)
+                    {
+                        points.push(this.bodySegments[i-1]);
+                        horizontal = false;
+                    }
+                }
+                else
+                {
+                    if(this.bodySegments[i].x != points[points.length-1].x)
+                    {
+                        points.push(this.bodySegments[i-1]);
+                        horizontal = true;
+                    }
+                }
 
-  points.push(this.bodySegments[this.bodySegments.length - 2]);
-  points = this.removeDuplicatesKeepFirst(points);
+                var x1 = this.bodySegments[i].x;
+                var y1 = this.bodySegments[i].y;
 
-  if (points.length >= 2) {
-    this.bodyGraphics.clear();
-  }
+                var x2 = this.bodySegments[i-1].x;
+                var y2 = this.bodySegments[i-1].y;
 
-  switch (mainMenu.texturePack) {
-    case 0:
-      this.bodyGraphics.fillStyle(0xff7900);
-      break;
-    case 1:
-      this.bodyGraphics.fillStyle(0xf7506a);
-      break;
-    case 2:
-      this.bodyGraphics.fillStyle(0xf2e820);
-      break;
-  }
+                //Расстояние между текущим кусок тела и прошлым больше 1
+                if(!(Math.abs(x1-x2) == CELL ^ Math.abs(y1-y2) == CELL))
+                {
+                    points.push(this.bodySegments[i-1]);
+                    points.push(null);
+                    points.push(this.bodySegments[i]);
+                }
+                
+            }
 
-  for (let i = 1; i < points.length; i++) {
-    const p1 = points[i - 1];
-    const p2 = points[i];
+            points.push(this.bodySegments[this.bodySegments.length-2]);
 
-    if (p1 === null || p2 === null) continue;
+            points = this.removeDuplicatesKeepFirst(points);
 
-    const minX = Math.min(p1.x, p2.x);
-    const minY = Math.min(p1.y, p2.y);
-    const maxX = Math.max(p1.x, p2.x);
-    const maxY = Math.max(p1.y, p2.y);
-    const width = maxX - minX + bodyWidth;
-    const height = maxY - minY + bodyWidth;
+            if(points.length >= 2)
+            {
+                this.bodyGraphics.clear();
+            }
 
-    if (p1.x === p2.x) {
-      this.bodyGraphics.fillRoundedRect(
-        minX - bodyWidth / 2,
-        minY - bodyWidth / 2,
-        bodyWidth,
-        height,
-        bodyRadius
-      );
-    } else if (p1.y === p2.y) {
-      this.bodyGraphics.fillRoundedRect(
-        minX - bodyWidth / 2,
-        minY - bodyWidth / 2,
-        width,
-        bodyWidth,
-        bodyRadius
-      );
-    }
-  }
+            switch(mainMenu.texturePack){
+                case 0:
+                    this.bodyGraphics.fillStyle(0xff7900);
+                    break;
+                case 1:
+                    this.bodyGraphics.fillStyle(0xf7506a);
+                    break;
+                case 2:
+                    this.bodyGraphics.fillStyle(0xf2e820);
+                    break;
+            }
 
-  this.bodyGraphics.fillPath();
-}
+            for(let i = 1; i < points.length; i++)
+            {
+                let p1 = points[i-1];
+                let p2 = points[i];
+
+                if(p1 == null || p2 == null) continue;
+
+                if(p1.x == p2.x)
+                {
+                    this.bodyGraphics.fillRoundedRect(Math.min(p1.x, p2.x)-bodyWidth/2, Math.min(p1.y, p2.y)-bodyWidth/2, bodyWidth, Math.abs(p1.y-p2.y) + bodyWidth, bodyRadius);
+                }
+                else if(p1.y == p2.y)
+                {
+                    this.bodyGraphics.fillRoundedRect(Math.min(p1.x, p2.x)-bodyWidth/2, Math.min(p1.y, p2.y)-bodyWidth/2, Math.abs(p1.x-p2.x) + bodyWidth, bodyWidth, bodyRadius);
+                }
+            }
+            
+            this.bodyGraphics.fillPath();
+        }
 
         removeDuplicatesKeepFirst(arr) {
             const uniqueValues = new Set();

@@ -584,18 +584,27 @@ var Snake = /*#__PURE__*/function (_Entity3) {
       var points = [this.bodySegments[0]];
       var horizontal = true;
       for (var i = 1; i < this.bodySegments.length - 1; i++) {
-        var currentSegment = this.bodySegments[i];
-        var previousSegment = this.bodySegments[i - 1];
-        if (horizontal && currentSegment.y !== points[points.length - 1].y || !horizontal && currentSegment.x !== points[points.length - 1].x) {
-          points.push(previousSegment);
-          horizontal = !horizontal;
+        if (horizontal) {
+          if (this.bodySegments[i].y != points[points.length - 1].y) {
+            points.push(this.bodySegments[i - 1]);
+            horizontal = false;
+          }
+        } else {
+          if (this.bodySegments[i].x != points[points.length - 1].x) {
+            points.push(this.bodySegments[i - 1]);
+            horizontal = true;
+          }
         }
-        var distanceX = Math.abs(currentSegment.x - previousSegment.x);
-        var distanceY = Math.abs(currentSegment.y - previousSegment.y);
-        if (distanceX !== 0 && distanceY !== 0) {
-          points.push(previousSegment);
+        var x1 = this.bodySegments[i].x;
+        var y1 = this.bodySegments[i].y;
+        var x2 = this.bodySegments[i - 1].x;
+        var y2 = this.bodySegments[i - 1].y;
+
+        //Расстояние между текущим кусок тела и прошлым больше 1
+        if (!(Math.abs(x1 - x2) == CELL ^ Math.abs(y1 - y2) == CELL)) {
+          points.push(this.bodySegments[i - 1]);
           points.push(null);
-          points.push(currentSegment);
+          points.push(this.bodySegments[i]);
         }
       }
       points.push(this.bodySegments[this.bodySegments.length - 2]);
@@ -617,17 +626,11 @@ var Snake = /*#__PURE__*/function (_Entity3) {
       for (var _i = 1; _i < points.length; _i++) {
         var p1 = points[_i - 1];
         var p2 = points[_i];
-        if (p1 === null || p2 === null) continue;
-        var minX = Math.min(p1.x, p2.x);
-        var minY = Math.min(p1.y, p2.y);
-        var maxX = Math.max(p1.x, p2.x);
-        var maxY = Math.max(p1.y, p2.y);
-        var width = maxX - minX + bodyWidth;
-        var height = maxY - minY + bodyWidth;
-        if (p1.x === p2.x) {
-          this.bodyGraphics.fillRoundedRect(minX - bodyWidth / 2, minY - bodyWidth / 2, bodyWidth, height, bodyRadius);
-        } else if (p1.y === p2.y) {
-          this.bodyGraphics.fillRoundedRect(minX - bodyWidth / 2, minY - bodyWidth / 2, width, bodyWidth, bodyRadius);
+        if (p1 == null || p2 == null) continue;
+        if (p1.x == p2.x) {
+          this.bodyGraphics.fillRoundedRect(Math.min(p1.x, p2.x) - bodyWidth / 2, Math.min(p1.y, p2.y) - bodyWidth / 2, bodyWidth, Math.abs(p1.y - p2.y) + bodyWidth, bodyRadius);
+        } else if (p1.y == p2.y) {
+          this.bodyGraphics.fillRoundedRect(Math.min(p1.x, p2.x) - bodyWidth / 2, Math.min(p1.y, p2.y) - bodyWidth / 2, Math.abs(p1.x - p2.x) + bodyWidth, bodyWidth, bodyRadius);
         }
       }
       this.bodyGraphics.fillPath();
@@ -1575,7 +1578,8 @@ try {
         mode: Phaser.Scale.FIT
       },
       audio: {
-        disableWebAudio: true
+        disableWebAudio: true,
+        noAudio: true
       }
     };
     var canvas = document.getElementsByTagName('canvas');
